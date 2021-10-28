@@ -6,8 +6,8 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { SwitchComponent } from '../../devices/switch/switch.component';
 import { CommonModule } from '@angular/common';
+import { SwitchModule } from '../../devices/switch/switch.module';
 
 @NgModule({
   imports: [
@@ -16,9 +16,9 @@ import { CommonModule } from '@angular/common';
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),
-    CommonModule
+    CommonModule,
+    SwitchModule
   ],
-  declarations: [ DashboardComponent,
-  SwitchComponent ]
+  declarations: [ DashboardComponent]
 })
 export class DashboardModule { }

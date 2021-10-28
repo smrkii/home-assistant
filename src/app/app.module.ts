@@ -44,9 +44,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { SwitchComponent } from './devices/switch/switch.component';
 import { RgbControllerComponent } from './devices/rgb-controller/rgb-controller.component';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -72,7 +72,7 @@ import { ToastrModule } from 'ngx-toastr';
       closeButton: true,
       extendedTimeOut: 2000,
 
-    }) // ToastrModule added
+    }), NgbModule // ToastrModule added
   ],
   declarations: [
     AppComponent,
