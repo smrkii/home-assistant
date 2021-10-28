@@ -1,0 +1,49 @@
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { AuthResponseData,AuthService} from '../../auth/auth.service'
+
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: 'login.component.html'
+})
+export class LoginComponent {
+  isLoading = false;
+  isError = false;
+  errorMessage: string = "";
+  private closeSub: Subscription;
+
+  constructor(private authService: AuthService,
+    private router: Router){}
+
+
+  onSubmit(form: NgForm){
+    const values = form.value
+    if (!form.valid) {
+      return;
+    }
+
+    let authObs: Observable<AuthResponseData>;
+    authObs = this.authService.login(values.email, values.password);
+
+    authObs.subscribe(
+      resData => {
+        console.log(resData);
+        this.isLoading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      errorMessage => {
+        console.log(errorMessage);
+        this.errorMessage = errorMessage;
+        this.isError = true;
+        this.isLoading = false;
+      }
+    );
+
+    form.reset();
+
+  }
+
+}

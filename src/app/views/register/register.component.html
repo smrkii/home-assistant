@@ -1,0 +1,129 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <form (ngSubmit)="onSubmit(f)" #f="ngForm"
+              >
+                <h1>Register</h1>
+                <p class="text-muted">Create your account</p>
+                <!--
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-user"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Username"
+                    autocomplete="username"
+                    required
+                    ngModel
+                    name="username"
+                    #username="ngModel"
+                    [ngClass] = "{'is-invalid' : !username.valid && username.touched}"/>
+                  <div class="invalid-feedback">
+                    Enter valid username
+                  </div>
+                </div>
+                -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control is-invalid"
+                    placeholder="Email"
+                    autocomplete="email"
+                    required
+                    ngModel
+                    name="email"
+                    email
+                    #email="ngModel"
+                    [ngClass] = "{'is-invalid' : !email.valid && email.touched}"/>
+                  <div class="invalid-feedback">
+                    Enter valid mail
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-lock"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    autocomplete="new-password"
+                    required
+                    ngModel
+                    name="password"
+                    #password = "ngModel"
+                    [ngClass] = "{'is-invalid' : !password.valid && password.touched}"/>
+                    <div class="invalid-feedback">
+                      Enter valid password
+                    </div>
+                </div>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-lock"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Repeat password"
+                    autocomplete="new-password"
+                    required
+                    ngModel
+                    name="rep-password"
+                    #repPassword = "ngModel"
+                    [ngClass] = "{'is-invalid' : (repPassword.value != password.value) && repPassword.touched}"/>
+                    <div class="invalid-feedback">
+                      Password doesn't match
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <p *ngIf="isError" style="color: rgb(255, 0, 0)">
+                      {{ errorMessage }}
+                    </p>
+                  </div>
+                </div>
+                <button type="submit" [disabled] = "!f.valid" class="btn btn-block btn-success">
+                  Create Account
+                </button>
+              </form>
+            </div>
+            <div class="card-footer p-4">
+              <!--
+              <div class="row">
+                <div class="col-6">
+                  <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
+                </div>
+              </div>
+              -->
+              <button
+                type="submit"
+                class="btn btn-primary px-4"
+                routerLink="/login"
+              >
+                To login
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,25 @@
+<div class="card text-white bg-primary">
+  <div class="card-body pb-0">
+    <div class="btn-group float-right" dropdown>
+      <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+        <i class="icon-settings"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+        <a class="dropdown-item" href="#">Settings</a>
+        <a class="dropdown-item" href="#">Status</a>
+        <a class="dropdown-item" href="#">Consumption</a>
+      </div>
+    </div>
+    <!-- <div class="text-value">9.823</div> -->
+    <div>Switch</div>
+  </div>
+  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+    <label class="switch switch-label switch-success">
+      <input type="checkbox" class="switch-input" (click)="onClick($event)">
+      <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+    </label>
+    <p *ngIf="status != null">{{this.status.data.device_status.relays[0].ison}}</p>
+  </div>
+
+</div>
+
