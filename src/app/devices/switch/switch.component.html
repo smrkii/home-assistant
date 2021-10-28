@@ -5,8 +5,8 @@
         <i class="icon-settings"></i>
       </button>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-        <a class="dropdown-item" href="#">Settings</a>
-        <a class="dropdown-item" href="#">Status</a>
+        <a class="dropdown-item" href="#" >Settings</a>
+        <a class="dropdown-item" href="#" (click)="openStatusModal()">Status</a>
         <a class="dropdown-item" href="#">Consumption</a>
       </div>
     </div>
@@ -20,6 +20,5 @@
     </label>
     <p *ngIf="status != null">{{this.status.data.device_status.relays[0].ison}}</p>
   </div>
-
 </div>
 

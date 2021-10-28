@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ChangeSwitch, Status } from '../../../core/api/devices/shelly1/shelly1.model';
 import { ShellyApiService } from '../../shared/shelly-api.service';
+import { SwitchStatusComponent } from './switch-status/switch-status.component';
 
 @Component({
   selector: 'app-switch',
@@ -12,9 +14,11 @@ export class SwitchComponent implements OnInit {
   state: string = 'off';
   changeSwitch: ChangeSwitch = null;
   status: Status = null;
+  closeResult = '';
 
   constructor(private shellyApi: ShellyApiService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
@@ -48,5 +52,20 @@ export class SwitchComponent implements OnInit {
       */
   }
 
+  openStatusModal(){
+    const modal = this.modalService.open(SwitchStatusComponent);
+    modal.componentInstance.name = 'Ziga'
+  }
+
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 
 }
