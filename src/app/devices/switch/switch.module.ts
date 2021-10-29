@@ -6,7 +6,6 @@ import { SwitchComponent } from './switch.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SwitchStatusComponent } from './switch-status/switch-status.component';
 
-
 @NgModule({
   declarations: [
     SwitchComponent,

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ChangeSwitch, Status } from "../../core/api/devices/shelly1/shelly1.model";
+import { ChangeSwitch, SwitchStatus } from "../../core/api/devices/shelly1/shelly1.model";
 import { environment } from "../../environments/environment";
 
 @Injectable({
@@ -20,7 +20,7 @@ export class ShellyApiService {
   }
 
   relayStatus(deviceId: string) {
-    return this.http.get<Status>(environment.base_url+environment.endpoints[0].device_status,
+    return this.http.get<SwitchStatus>(environment.base_url+environment.endpoints[0].device_status,
       {
         params: new HttpParams().set('auth_key',environment.shelly_auth_key)
         .set('id',deviceId)

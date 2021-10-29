@@ -1,4 +1,4 @@
-export class Status{
+export class SwitchStatus{
   isok: boolean;
   max_power: number;
   data: Data;

@@ -15,10 +15,9 @@
   </div>
   <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
     <label class="switch switch-label switch-success">
-      <input type="checkbox" class="switch-input" (click)="onClick($event)">
+      <input type="checkbox" class="switch-input" (click)="onSwitchClick($event)">
       <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
     </label>
-    <p *ngIf="status != null">{{this.status.data.device_status.relays[0].ison}}</p>
   </div>
 </div>
 
