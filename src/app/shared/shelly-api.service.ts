@@ -19,6 +19,13 @@ export class ShellyApiService {
     return this.http.post<ChangeSwitch>(environment.base_url+environment.endpoints[0].switch_controll, formData);
   }
 
+  relaySetName() {
+    var formData: any = new FormData();
+    formData.append("name", "aaaaa");
+
+    return this.http.post<any>("http://192.168.0.201/settings", formData);
+  }
+
   relayStatus(deviceId: string) {
     return this.http.get<SwitchStatus>(environment.base_url+environment.endpoints[0].device_status,
       {

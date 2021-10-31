@@ -38,8 +38,6 @@ export class SwitchComponent implements OnInit {
         this.toastr.error(error.message, 'Toastr fun!');
       }
     );
-
-
   }
 
   openStatusModal(){
