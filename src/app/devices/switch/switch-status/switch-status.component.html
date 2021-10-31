@@ -1,71 +1,276 @@
 <div class="modal-header">
-  <h4 class="modal-title">Status</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <div class="row">
+    <div class="col"><h4 class="modal-title">Status</h4></div>
+    <div class="col"><h4 [ngStyle]="{color: status == true ? 'green':'red'}" style="color: green" class="modal-title">{{status == true ? 'OK' : 'ERROR'}}</h4></div>
+  </div>
+
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-
-  <!--Accordion wrapper-->
-<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
-
-
-
-
-
-
-
-  <!-- Accordion card -->
-  <div class="card">
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="headingOne1">
-      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
-        aria-controls="collapseOne1">
-        <h5 class="mb-0">
-          Network
-        </h5>
-      </a>
-    </div>
-    <!-- Card body -->
-    <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
-      data-parent="#accordionEx">
-      <div class="card-body">
-        net stat
+  <form #f="ngForm">
+    <!--Accordion wrapper-->
+    <div
+      class="accordion md-accordion"
+      id="accordionEx"
+      role="tablist"
+      aria-multiselectable="true"
+    >
+      <!-- Accordion card -->
+      <div class="card"
+        ngModelGroup="networkGroup"
+        #networkGroup="ngModelGroup"
+      >
+        <!-- Card header -->
+        <div
+          class="card-header"
+          role="tab"
+          id="headingOne1"
+          style="cursor: pointer"
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseOne1"
+          aria-expanded="true"
+          aria-controls="collapseOne1"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Network</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
+        <!-- Card body -->
+        <div
+          id="collapseOne1"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingOne1"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <div class="form-group">
+              <label for="ssid">SSID</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="ssid"
+                value="asd"
+                ngModel
+                name="ssid"
+              />
+            </div>
+            <div class="form-group">
+              <label for="ip">Ip</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="ip"
+                value="asd"
+                ngModel
+                name="ip"
+              />
+            </div>
+            <div class="form-group">
+              <label for="connected">Connected</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="connected"
+                value="asd"
+                ngModel
+                name="connected"
+              />
+            </div>
+            <div class="form-group">
+              <label for="mac">Mac</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="mac"
+                value="asd"
+                ngModel
+                name="mac"
+              />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+      <!-- Accordion card -->
 
-  </div>
-  <!-- Accordion card -->
+      <!-- Accordion card -->
+      <div class="card"
+      ngModelGroup="temperatureGroup"
+      #temperatureGroup="ngModelGroup">
+        <!-- Card header -->
+        <div
+          class="card-header"
+          role="tab"
+          id="headingTwo2"
+          style="cursor: pointer"
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseTwo2"
+          aria-expanded="true"
+          aria-controls="collapseTwo2"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Temperature</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
 
-  <!-- Accordion card -->
-  <div class="card">
-
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="headingTwo2">
-      <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
-        aria-expanded="false" aria-controls="collapseTwo2">
-        <h5 class="mb-0">
-          Temperature
-        </h5>
-      </a>
-    </div>
-
-    <!-- Card body -->
-    <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
-      data-parent="#accordionEx">
-      <div class="card-body">
-        Temp
+        <!-- Card body -->
+        <div
+          id="collapseTwo2"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingTwo2"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <div class="form-group">
+              <label for="tempStatus">Status</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="tempStatus"
+                ngModel
+                name="tempStatus"
+              />
+            </div>
+            <div class="form-group">
+              <label for="temp">Temperature</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="temp"
+                ngModel
+                name="temp"
+              />
+            </div>
+            <div class="form-group">
+              <label for="overTemp">Over temperature</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="overTemp"
+                ngModel
+                name="overTemp"
+              />
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- Accordion card -->
+
+      <!-- Accordion card -->
+      <div class="card"
+        ngModelGroup="softwareGroup"
+        #softwareGroup = "ngModelGroup"
+      >
+        <!-- Card header -->
+        <div
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseThree3"
+          aria-expanded="true"
+          class="card-header"
+          role="tab"
+          id="headingThree3"
+          style="cursor: pointer"
+          aria-controls="collapseThree3"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Software</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
+
+        <!-- Card body -->
+        <div
+          id="collapseThree3"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingThree3"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <div class="form-group">
+              <label for="softwareStatus">Status</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="softwareStatus"
+                ngModel
+                name="softwareStatus"
+              />
+            </div>
+            <div class="form-group">
+              <label for="hasUpdate">Has update</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="hasUpdate"
+                ngModel
+                name="hasUpdate"
+              />
+            </div>
+            <div class="form-group">
+              <label for="newVersion">New version</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="newVersion"
+                ngModel
+                name="newVersion"
+              />
+            </div>
+            <div class="form-group">
+              <label for="oldVersion">Old version</label>
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                id="oldVersion"
+                ngModel
+                name="oldVersion"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Accordion card -->
     </div>
-
-  </div>
-  <!-- Accordion card -->
-</div>
-<!-- Accordion wrapper -->
-
-
-  <p>Hello, {{deviceId}}!</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    <!-- Accordion wrapper -->
+  </form>
 </div>
