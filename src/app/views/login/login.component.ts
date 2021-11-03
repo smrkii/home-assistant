@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthResponseData,AuthService} from '../../auth/auth.service'
+import { ShellyApiService } from '../../shared/shelly-api.service';
 
 
 @Component({
@@ -16,7 +17,14 @@ export class LoginComponent {
   private closeSub: Subscription;
 
   constructor(private authService: AuthService,
-    private router: Router){}
+    private router: Router,
+    private shellyApi: ShellyApiService){}
+    private firebaseLogin: boolean = false;
+    private shellyLogin: boolean = false;
+
+
+
+
 
 
   onSubmit(form: NgForm){
@@ -32,7 +40,33 @@ export class LoginComponent {
       resData => {
         console.log(resData);
         this.isLoading = false;
-        this.router.navigate(['/dashboard']);
+        this.firebaseLogin = true;
+
+        let authObsShelly: Observable<any>;
+        authObsShelly = this.shellyApi.login();
+
+        authObsShelly.subscribe(
+          resData => {
+            console.log(resData);
+            this.isLoading = false;
+            this.shellyLogin = true;
+
+            if(this.firebaseLogin && this.shellyLogin){
+              this.router.navigate(['/dashboard']);
+            }
+
+          },
+          errorMessage => {
+            console.log(errorMessage);
+            this.errorMessage = errorMessage;
+            this.isError = true;
+            this.isLoading = false;
+          }
+        );
+
+
+
+
       },
       errorMessage => {
         console.log(errorMessage);
@@ -42,7 +76,11 @@ export class LoginComponent {
       }
     );
 
-    form.reset();
+
+
+
+
+
 
   }
 
