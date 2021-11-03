@@ -1,16 +1,15 @@
 export class ShellyUser{
 
 
-
   constructor(private lang: string,
     private token: string,
     private timezone: string){}
 
-  getToken(){
+  get Token(){
     return this.token;
   };
 
-  getLang(){
+  get Lang(){
     return this.lang;
   }
 

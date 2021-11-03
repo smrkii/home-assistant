@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { AuthResponseData,AuthService} from '../../auth/auth.service'
-import { ShellyApiService } from '../../shared/shelly-api.service';
-
+import { Component } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
+import { Observable, Subscription } from "rxjs";
+import { AuthResponseData, AuthService } from "../../auth/auth.service";
+import { DevicesService } from "../../devices/devices.service";
+import { ShellyApiService } from "../../shared/shelly-api.service";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: 'login.component.html'
+  selector: "app-dashboard",
+  templateUrl: "login.component.html",
 })
 export class LoginComponent {
   isLoading = false;
@@ -16,72 +16,61 @@ export class LoginComponent {
   errorMessage: string = "";
   private closeSub: Subscription;
 
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private router: Router,
-    private shellyApi: ShellyApiService){}
-    private firebaseLogin: boolean = false;
-    private shellyLogin: boolean = false;
+    private shellyApi: ShellyApiService,
+    private devicesService: DevicesService
+  ) {}
+  private firebaseLogin: boolean = false;
+  private shellyLogin: boolean = false;
 
-
-
-
-
-
-  onSubmit(form: NgForm){
-    const values = form.value
+  onSubmit(form: NgForm) {
+    const values = form.value;
     if (!form.valid) {
       return;
     }
 
+    //firebase login
     let authObs: Observable<AuthResponseData>;
     authObs = this.authService.login(values.email, values.password);
 
     authObs.subscribe(
-      resData => {
+      (resData) => {
         console.log(resData);
         this.isLoading = false;
         this.firebaseLogin = true;
 
+        //shelly login
         let authObsShelly: Observable<any>;
         authObsShelly = this.shellyApi.login();
-
         authObsShelly.subscribe(
-          resData => {
+          (resData) => {
             console.log(resData);
             this.isLoading = false;
             this.shellyLogin = true;
 
-            if(this.firebaseLogin && this.shellyLogin){
-              this.router.navigate(['/dashboard']);
-            }
+            this.devicesService.getDevices();
 
+
+            if (this.firebaseLogin && this.shellyLogin) {
+              this.router.navigate(["/dashboard"]);
+            }
           },
-          errorMessage => {
+          (errorMessage) => {
             console.log(errorMessage);
             this.errorMessage = errorMessage;
             this.isError = true;
             this.isLoading = false;
           }
         );
-
-
-
-
       },
-      errorMessage => {
+      (errorMessage) => {
         console.log(errorMessage);
         this.errorMessage = errorMessage;
         this.isError = true;
         this.isLoading = false;
       }
     );
-
-
-
-
-
-
-
   }
-
 }

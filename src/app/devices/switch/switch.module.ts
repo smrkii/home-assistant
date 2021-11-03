@@ -18,7 +18,6 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     SwitchRoutingModule,
     BsDropdownModule,
-    NgbModule,
     FormsModule
   ],
   exports:[SwitchComponent]

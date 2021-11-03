@@ -1,13 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { DevicesService } from '../../devices/devices.service';
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
 
+  constructor(private devicesService: DevicesService){
+    this.devicesService.devices.subscribe(
+      (value) =>{
+        console.log(value);
+      }
+    )
+
+
+
+  }
+
+
+
   radioModel: string = 'Month';
+
 
   // lineChart1
   public lineChart1Data: Array<any> = [

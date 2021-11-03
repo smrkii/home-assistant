@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Route } from '@angular/compiler/src/core';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -36,6 +36,7 @@ export class AuthService {
           email: email,
           password: password,
           returnSecureToken: true
+
         }
       )
       .pipe(

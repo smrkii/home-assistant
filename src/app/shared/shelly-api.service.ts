@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
+import { Device } from "../../core/api/devices/device.model";
 import { ChangeSwitch, SwitchStatus } from "../../core/api/devices/shelly1/shelly1.model";
 import { environment } from "../../environments/environment";
 import { ShellyUser } from "./shelly-user.model";
@@ -48,7 +49,6 @@ export class ShellyApiService {
       catchError(this.handleError),
       tap(resData => {
 
-
         this.handleAuthentication(
           resData.data.lang,resData.data.token,resData.data.timezone
 
@@ -70,4 +70,49 @@ export class ShellyApiService {
   private handleError(errorRes: HttpErrorResponse) {
     return throwError(errorRes.message);
   }
+
+  autoLogin() {
+
+
+    const userData: {
+      lang: string;
+      token: string;
+      timezone: string;
+    } = JSON.parse(localStorage.getItem('shelly-userData'));
+
+
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new ShellyUser(
+      userData.lang,
+      userData.token,
+      userData.timezone
+    );
+
+    this.shellyUser.next(loadedUser);
+
+  }
+
+
+  getDevices(){
+    return this.http.get<any>('https://shelly-29-eu.shelly.cloud/interface/device/get_all_lists')
+    .pipe(
+      map( response => {
+          var dd: any = response
+          var devices: Device[];
+          devices = dd.data.devices;
+          return devices;
+      }),
+      catchError( error => {
+          return throwError(error); // From 'rxjs'
+      })
+   );
+  }
+
+  getDevicesStatus(){
+
+  }
+
 }
