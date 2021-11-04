@@ -16,20 +16,24 @@ export class AuthInterceptorService implements HttpInterceptor {
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-
-
     return this.authService.user.pipe(
       take(1),
       exhaustMap(user => {
 
-        if (!user || req.headers.has("skip")) {
+        if ((!user && !this.shellyApi.shellyUser.getValue()) || req.headers.get("skip")) {
+          req = req.clone({
+            headers: req.headers.delete('skip')
+          });
           return next.handle(req);
         }
-        const modifiedReq = req.clone({
+        var modifiedReq = req.clone({
            setHeaders:{
             'Authorization': 'Bearer ' + this.shellyApi.shellyUser.getValue().Token
           }
           //params: new HttpParams().set('login', user.token)
+        });
+        modifiedReq = modifiedReq.clone({
+          headers: modifiedReq.headers.delete('skip')
         });
         return next.handle(modifiedReq);
       })

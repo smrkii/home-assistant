@@ -37,7 +37,6 @@ export class LoginComponent {
 
     authObs.subscribe(
       (resData) => {
-        console.log(resData);
         this.isLoading = false;
         this.firebaseLogin = true;
 
@@ -46,7 +45,6 @@ export class LoginComponent {
         authObsShelly = this.shellyApi.login();
         authObsShelly.subscribe(
           (resData) => {
-            console.log(resData);
             this.isLoading = false;
             this.shellyLogin = true;
 

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
@@ -44,7 +44,8 @@ export class ShellyApiService {
     formData.append('email','zigas112233@gmail.com');
     formData.append('password','e59973bf8d78cca8c916a83ed799b1268367fc01');
 
-    return this.http.post<any>('https://api.shelly.cloud/auth/login',formData)
+    return this.http.post<any>('https://api.shelly.cloud/auth/login',formData,
+    {headers: new HttpHeaders({skip: 'true'})})
     .pipe(
       catchError(this.handleError),
       tap(resData => {

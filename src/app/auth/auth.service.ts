@@ -27,17 +27,18 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+
+
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
-        environment.apiKey,
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +environment.apiKey,
         {
           email: email,
           password: password,
           returnSecureToken: true
 
-        }
+        },{headers: new HttpHeaders({skip: 'skip'})}
       )
       .pipe(
         catchError(this.handleError),
@@ -61,7 +62,7 @@ export class AuthService {
           email: email,
           password: password,
           returnSecureToken: true
-        }
+        },{headers: new HttpHeaders({skip: 'skip'})}
       )
       .pipe(
         catchError(this.handleError),
