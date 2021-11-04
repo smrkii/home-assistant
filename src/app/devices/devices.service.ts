@@ -7,20 +7,45 @@ import { ShellyApiService } from "../shared/shelly-api.service";
   providedIn: "root",
 })
 export class DevicesService {
-  devices = new Subject<Device[]>();
+  devices = new Subject<Object>();
 
   constructor(private shellyApiService: ShellyApiService) {}
 
   getDevices() {
-    this.shellyApiService.getDevices().subscribe(
-      (response) => {
-        var devices: Device[];
-        devices = response;
-        this.devices.next(devices)
+    var devicesProps: Object;
+    var devicesStatus: Object;
+    var dev = {};
+
+    this.shellyApiService.getDevicesProps().subscribe(
+      (devicesResponse) => {
+
+        devicesProps = devicesResponse;
+
+        //device statuses
+        this.shellyApiService.getDevicesStatus().subscribe(
+          (statusResponse) => {
+            devicesStatus = statusResponse
+            Object.entries(devicesProps).map(([id, props]) => {
+              var status = devicesStatus[id];
+              dev[id] = {props,status}
+          })
+            this.devices.next(dev);
+            localStorage.setItem("devices", JSON.stringify(dev));
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
+
+
+
       },
       (error) => {
         console.log(error);
       }
     );
+
+
   }
+
 }

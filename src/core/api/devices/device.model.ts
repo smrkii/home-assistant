@@ -1,3 +1,5 @@
+import { setConstantValue } from "typescript";
+
 export class Device{
   id: string;
   name: string;
@@ -18,6 +20,9 @@ export class Device{
   exclude_event_log: boolean;
   name_sync: boolean
 }
+
+
+
 
 export class Login{
   enabled: boolean;
