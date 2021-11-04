@@ -8,6 +8,8 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { CommonModule } from '@angular/common';
 import { SwitchModule } from '../../devices/switch/switch.module';
+import { Shht1Module } from '../../devices/shht1/shht1.module';
+import { RgbControllerModule } from '../../devices/rgb-controller/rgb-controller.module';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { SwitchModule } from '../../devices/switch/switch.module';
     BsDropdownModule,
     ButtonsModule.forRoot(),
     CommonModule,
-    SwitchModule
+    SwitchModule,
+    Shht1Module,
+    RgbControllerModule
   ],
   declarations: [ DashboardComponent]
 })
