@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
 import { RgbControllerComponent } from './rgb-controller.component';
+import { NgxColorsModule } from 'ngx-colors';
 
 @NgModule({
   declarations: [
@@ -13,8 +14,10 @@ import { RgbControllerComponent } from './rgb-controller.component';
     RouterModule,
     CommonModule,
     BsDropdownModule,
-    FormsModule
+    FormsModule,
+    NgxColorsModule
   ],
-  exports:[RgbControllerComponent]
+  exports:[RgbControllerComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class RgbControllerModule{}
