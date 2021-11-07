@@ -14,8 +14,9 @@ import { RgbControllerStatusComponent } from "./rgb-controller-status/rgb-contro
 })
 export class RgbControllerComponent implements OnInit {
   @Input("deviceProps") deviceProps: Device;
-  @Input("deviceStatus") deviceStatus: RgbwControllerStatus;
+  @Input("deviceStatus") deviceStatus: any;
   @ViewChild("myDiv") myDiv: ElementRef<HTMLElement>;
+  @ViewChild("switch",{static: false}) switch: ElementRef;
   hideColorPicker1: boolean = false;
   hideTextInput1: boolean = true;
   color: string = "rgb(0, 0, 255)";
@@ -62,7 +63,18 @@ export class RgbControllerComponent implements OnInit {
     private modalService: NgbModal
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.state = this.deviceStatus.lights[0].ison === false ? 'off' : 'on';
+    this.color = 'rgb(' + this.deviceStatus.lights[0].red + ',' + this.deviceStatus.lights[0].green +
+    ',' + this.deviceStatus.lights[0].blue + ')'
+
+    this.gain = this.deviceStatus.lights[0].gain;
+    this.white = this.deviceStatus.lights[0].white;
+  }
+
+  ngAfterViewInit() {
+    this.switch.nativeElement.checked = this.state === 'off' ? false : true
+  }
 
   onColorChanged() {
     clearInterval(this.timer);

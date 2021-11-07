@@ -10,10 +10,13 @@ import { Subscription } from "rxjs";
 export class DashboardComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   devices = {};
+  myInterval: any;
 
   constructor(private devicesService: DevicesService) {
-    if (localStorage.getItem('devices'))
+    if (localStorage.getItem("devices"))
       this.devices = JSON.parse(localStorage.getItem("devices"));
+
+
   }
 
   ngOnInit(): void {
@@ -27,10 +30,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subscription = this.devicesService.devices.subscribe((value) => {
       this.devices = value;
     });
+
+    this.myInterval = setInterval(() => {
+      this.devicesService.getDevices();
+    }, 5000);
+
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    clearInterval(this.myInterval);
   }
 
   radioModel: string = "Month";

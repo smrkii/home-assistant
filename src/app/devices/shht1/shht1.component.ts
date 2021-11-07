@@ -16,7 +16,6 @@ export class Shht1Component implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    console.log(this.deviceStatus);
 
   }
 
