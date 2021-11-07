@@ -17,8 +17,22 @@
     <!-- <div class="text-value">9.823</div> -->
     <div>{{ this.deviceProps.name }}</div>
   </div>
-  <div style="padding: 20px">
-    <ngx-colors
+
+  <div class="row">
+    <div class="col-4 ">
+      <div class="chart-wrapper mx-3">
+        <label class="switch switch-label switch-success">
+          <input #switch
+            type="checkbox"
+            class="switch-input"
+            (click)="onSwitchClick($event)"
+          />
+          <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+        </label>
+      </div>
+    </div>
+    <div class="col">
+      <ngx-colors
       #myDiv
       ngx-colors-trigger
       [palette]="colorPalette"
@@ -27,8 +41,42 @@
       [(ngModel)]="color"
       [format]="format"
       [colorsAnimation]="colorsAnimation"
-      (change)="onColorChanged($event)"
+      (input)="onColorChanged()"
     >
     </ngx-colors>
+    </div>
   </div>
+  <div class="row">
+    <div class="col-sm-3" style="margin-left: 15px">
+      White
+    </div>
+    <div class="col" style="margin-left: 15px">
+      <mv-slider
+      [(value)]="white"
+      [min]="0"
+      [max]="100"
+      [enabled]="enabled"
+      [tooltip]="'show'"
+      [formatter]=formatter
+      (change)="onColorChanged()"
+    ></mv-slider>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3" style="margin-left: 15px">
+      Color
+    </div>
+    <div class="col"  style="margin-left: 15px">
+      <mv-slider
+      [(value)]="gain"
+      [min]="0"
+      [max]="100"
+      [enabled]="enabled"
+      [tooltip]="'show'"
+      [formatter]=formatter
+      (change)="onColorChanged()"
+    ></mv-slider>
+    </div>
+  </div>
+  <div class="row" ><div class="col" style="margin:5px"></div></div>
 </div>

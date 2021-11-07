@@ -21,9 +21,6 @@ export class Device{
   name_sync: boolean
 }
 
-
-
-
 export class Login{
   enabled: boolean;
   username: string;

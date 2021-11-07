@@ -18,7 +18,6 @@ export class SwitchComponent implements OnInit {
 
 
   state: string = 'off';
-  changeSwitch: ChangeSwitch = null;
   closeResult = '';
 
   constructor(private shellyApi: ShellyApiService,
@@ -33,7 +32,7 @@ export class SwitchComponent implements OnInit {
     var sendStat = this.state === 'off' ? 'on' : 'off'
 
      this.shellyApi.relayControll(0,sendStat,this.deviceProps.id).subscribe(
-      (response) => {this.changeSwitch = response
+      (response) => {
         this.state = sendStat;
         (event.target as HTMLInputElement).checked = this.state === 'off' ? false : true
         //this.toastr.success('Hello world!', 'Toastr fun!');

@@ -8,6 +8,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { Device } from "../../core/api/devices/device.model";
+import { RgbwControllerStatus } from "../../core/api/devices/rgb-controller/rgb-controller.model";
 import {
   ChangeSwitch,
   SwitchStatus,
@@ -50,6 +51,45 @@ export class ShellyApiService {
           .set("auth_key", environment.shelly_auth_key)
           .set("id", deviceId),
       }
+    );
+  }
+
+  rgbwControllerStatus(deviceId: string) {
+    return this.http.get<RgbwControllerStatus>(
+      environment.base_url + environment.endpoints[0].device_status,
+      {
+        params: new HttpParams()
+          .set("auth_key", environment.shelly_auth_key)
+          .set("id", deviceId),
+      }
+    );
+  }
+
+  rgbwControllerControll(
+    id: string,
+    turn: string,
+    red: number,
+    green: number,
+    blue: number,
+    white: number,
+    gain: number
+  ) {
+    var formData: any = new FormData();
+    formData.append("id", id);
+    formData.append("turn", turn);
+
+    if(red !== null) formData.append("red", red);
+    if(green !== null) formData.append("green", green);
+    if(blue !== null) formData.append("blue", blue);
+    if(white !== null) formData.append("white", white);
+    if(gain !== null) formData.append("gain", gain);
+
+    formData.append("auth_key", environment.shelly_auth_key);
+
+
+    return this.http.post<ChangeSwitch>(
+      environment.base_url + environment.endpoints[0].rgbw_controll,
+      formData
     );
   }
 
@@ -125,8 +165,6 @@ export class ShellyApiService {
       .get<any>("https://shelly-29-eu.shelly.cloud/device/all_status")
       .pipe(
         map((response) => {
-
-
           var dd: any = response;
           return dd.data.devices_status;
         }),

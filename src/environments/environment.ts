@@ -11,6 +11,7 @@ export const environment = {
   endpoints:[
     {
       switch_controll: '/device/relay/control',
+      rgbw_controll: '/device/light/control',
       device_status: '/device/status'
     }
 
