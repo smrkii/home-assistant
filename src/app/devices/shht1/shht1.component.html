@@ -14,10 +14,15 @@
     <div>{{this.deviceProps.name}}</div>
   </div>
   <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-    <label class="switch switch-label switch-success">
-      <input type="checkbox" class="switch-input">
-      <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-    </label>
+    <div class="row">
+      <div class="col-4">Tmp:</div>
+      <div class="col"><h4>{{this.deviceStatus.tmp.value}}°C</h4></div>
+    </div>
+    <div class="row">
+      <div class="col-4">Hum:</div>
+      <div class="col"><h4>{{this.deviceStatus.hum.value}}%</h4></div>
+    </div>
+    <div class="row" style="height: 5px;"></div>
   </div>
 </div>
 

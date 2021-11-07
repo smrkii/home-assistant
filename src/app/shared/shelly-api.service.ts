@@ -13,6 +13,7 @@ import {
   ChangeSwitch,
   SwitchStatus,
 } from "../../core/api/devices/shelly1/shelly1.model";
+import { Shht1Status } from "../../core/api/devices/shht1/shht1.model";
 import { environment } from "../../environments/environment";
 import { ShellyUser } from "./shelly-user.model";
 
@@ -45,6 +46,17 @@ export class ShellyApiService {
 
   relayStatus(deviceId: string) {
     return this.http.get<SwitchStatus>(
+      environment.base_url + environment.endpoints[0].device_status,
+      {
+        params: new HttpParams()
+          .set("auth_key", environment.shelly_auth_key)
+          .set("id", deviceId),
+      }
+    );
+  }
+
+  shht1Status(deviceId: string) {
+    return this.http.get<Shht1Status>(
       environment.base_url + environment.endpoints[0].device_status,
       {
         params: new HttpParams()
