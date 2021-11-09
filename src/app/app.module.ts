@@ -48,7 +48,8 @@ import { RgbControllerComponent } from './devices/rgb-controller/rgb-controller.
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { Shht1Component } from './devices/shht1/shht1.component';
+import { ConsumptionCurrentModule } from './consumption/consumption-current/consumption-current.module';
+import { ConsumptionOverallModule } from './consumption/consumption-overall/consumption-overall.module';
 
 @NgModule({
   imports: [
@@ -65,6 +66,8 @@ import { Shht1Component } from './devices/shht1/shht1.component';
     TabsModule.forRoot(),
     ChartsModule,
     IconModule,
+    ConsumptionCurrentModule,
+    ConsumptionOverallModule,
     IconSetModule.forRoot(),
     HttpClientModule,
     FormsModule,

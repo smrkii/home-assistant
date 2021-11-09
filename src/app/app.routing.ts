@@ -71,6 +71,14 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
+        path: 'consumption/current',
+        loadChildren: () => import('./consumption/consumption-current/consumption-current.module').then(m => m.ConsumptionCurrentModule)
+      },
+      {
+        path: 'consumption/overall',
+        loadChildren: () => import('./consumption/consumption-overall/consumption-overall.module').then(m => m.ConsumptionOverallModule)
+      },
+      {
         path: 'icons',
         loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
       },
