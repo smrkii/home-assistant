@@ -4,11 +4,82 @@ export const navItems: INavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    icon: 'icon-speedometer',
-    badge: {
+    icon: 'cil-equalizer',
+    /* badge: {
       variant: 'info',
       text: 'NEW'
-    }
+    } */
+  },
+  {
+    title: true,
+    name: 'Devices'
+  },
+  {
+    name: 'Edit',
+    url: '/devices/edit',
+    icon: 'cil-pen',
+    children:[
+      {
+        name: 'Add new',
+        url: '/devices/add',
+        icon: 'cil-plus'
+      },
+      {
+        name: 'Settings',
+        url: '/devices/settings',
+        icon: 'cil-settings'
+      },
+      {
+        name: 'Delete',
+        url: '/devices/delete',
+        icon: 'cil-minus'
+      }
+    ]
+  },
+  /* {
+    name: 'Consumption',
+    url: '/theme/colors',
+    icon: 'cil-chart'
+  }, */
+  {
+    title: true,
+    name: 'Groups',
+  },
+  {
+    name: 'Edit',
+    url: '/groups/edit',
+    icon: 'cil-pen',
+    children: [
+      {
+        name: 'Add new',
+        url: '/groups/add',
+        icon: 'cil-plus'
+      },
+      {
+        name: 'Settings',
+        url: '/groups/settings',
+        icon: 'cil-settings'
+      },
+      {
+        name: 'Delete',
+        url: '/groups/delete',
+        icon: 'cil-minus'
+      }
+    ]
+  },
+  {
+    title: true,
+    name: 'Consumption panel'
+  },
+  {
+    name: 'Current',
+    url: '/consumption/current',
+    icon: 'cil-chart'
+  },
+  {
+    name: 'Overall',
+    url: '/consumption/overall',
+    icon: 'cil-chart'
   },
   {
     title: true,
