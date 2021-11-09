@@ -7,6 +7,9 @@ import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from './auth/auth.service';
 import { ShellyApiService } from './shared/shelly-api.service';
 
+declare var annyang: any;
+declare var SpeechKITT: any;
+
 @Component({
   // tslint:disable-next-line
   selector: 'body',
@@ -35,5 +38,41 @@ export class AppComponent implements OnInit {
     this.authService.autoLogin();
     this.shellyApiService.autoLogin();
 
+    const commands = {
+      'hi': () => { alert('hi'); },
+      'turn my room switch on': () => { this.onSwitchClick(); },
+      'turn my room switch off': () => { this.offSwitchClick(); }
+    };
+    annyang.addCommands(commands);
+    annyang.start();
+
   }
+
+  onSwitchClick(){
+     this.shellyApiService.relayControll(0,'on','e8db84d28717').subscribe(
+      (response) => {
+
+        //this.toastr.success('Hello world!', 'Toastr fun!');
+      },
+      (error) => {
+        console.log(error);
+
+
+      }
+    );
+  }
+
+  offSwitchClick(){
+    this.shellyApiService.relayControll(0,'off','e8db84d28717').subscribe(
+     (response) => {
+
+       //this.toastr.success('Hello world!', 'Toastr fun!');
+     },
+     (error) => {
+       console.log(error);
+
+
+     }
+   );
+ }
 }
