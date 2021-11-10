@@ -7,6 +7,7 @@ import {
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
+import { ConsumptionOverall } from "../../core/api/consumption/consumption-overall.model";
 import { Device } from "../../core/api/devices/device.model";
 import { RgbwControllerStatus } from "../../core/api/devices/rgb-controller/rgb-controller.model";
 import {
@@ -179,6 +180,23 @@ export class ShellyApiService {
         map((response) => {
           var dd: any = response;
           return dd.data.devices_status;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  getConsumptionOverall(dateRange: string) {
+    return this.http
+      .get<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/statistics/relay/overall_consumption_test?date_range=month",
+        {
+          params: new HttpParams().set('date_range',dateRange)
+        }
+      )
+      .pipe(
+        map((response) => {
+          return response;
         }),
         catchError((error) => {
           return throwError(error); // From 'rxjs'

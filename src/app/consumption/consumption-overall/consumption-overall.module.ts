@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ConsumptionOverallComponent } from './consumption-overall.component';
 import { ConsumptionOverallRoutnigModule } from './consumption-overall-routing.module';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ConsumptionOverallRoutnigModule } from './consumption-overall-routing.m
     RouterModule,
     CommonModule,
     FormsModule,
-    ConsumptionOverallRoutnigModule
+    ConsumptionOverallRoutnigModule,
+    ChartsModule
   ],
   exports:[]
 })
