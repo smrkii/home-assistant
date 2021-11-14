@@ -7,13 +7,13 @@ import { ShellyApiService } from "../shared/shelly-api.service";
   providedIn: "root",
 })
 export class ConsumptionService {
-  dateRange: string;
-  overallConsumption= new Subject<ConsumptionOverall>();
-
   constructor(private shellyApiService: ShellyApiService) {}
 
-  getOverallConsumption(dateRange: string){
-    return this.shellyApiService.getConsumptionOverall(dateRange)
+  getOverallConsumption(interval: string){
+    return this.shellyApiService.getConsumptionOverall(interval)
+  }
 
+  getDeviceConsumption(interval: string, device_id: string){
+    return this.shellyApiService.getDeviceConsumption(interval,device_id);
   }
 }

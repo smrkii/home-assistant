@@ -79,6 +79,10 @@ export const routes: Routes = [
         loadChildren: () => import('./consumption/consumption-overall/consumption-overall.module').then(m => m.ConsumptionOverallModule)
       },
       {
+        path: 'consumption/devices',
+        loadChildren: () => import('./consumption/consumption-devices/consumption-devices.module').then(m => m.ConsumptionDevicesModule)
+      },
+      {
         path: 'icons',
         loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
       },

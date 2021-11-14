@@ -2,25 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ConsumptionOverallComponent } from './consumption-overall.component';
-import { ConsumptionOverallRoutnigModule } from './consumption-overall-routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { ConsumptionModule } from '../consumption.module';
-import { ConsumptionComponent } from '../consumption.component';
+import { ConsumptionDevicesComponent } from './consumption-devices.component';
+import { ConsumptionDevicesRoutnigModule } from './consumption-devices-routing.module';
 
 
 @NgModule({
   declarations: [
-    ConsumptionOverallComponent
+    ConsumptionDevicesComponent
   ],
   imports: [
     RouterModule,
     CommonModule,
     FormsModule,
-    ConsumptionOverallRoutnigModule,
     ChartsModule,
-    ConsumptionModule
+    ConsumptionModule,
+    ConsumptionDevicesRoutnigModule
   ],
   exports:[]
 })
-export class ConsumptionOverallModule{}
+export class ConsumptionDevicesModule{}

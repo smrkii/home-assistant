@@ -189,9 +189,26 @@ export class ShellyApiService {
 
   getConsumptionOverall(dateRange: string) {
     return this.http
-      .get<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/statistics/relay/overall_consumption_test?date_range=month",
+      .get<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/statistics/relay/overall_consumption_test",
         {
           params: new HttpParams().set('date_range',dateRange)
+        }
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  getDeviceConsumption(dateRange: string,device_id: string) {
+    return this.http
+      .get<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/statistics/relay/consumption?id=e8db84d28717&channel=0",
+        {
+          params: new HttpParams().set('date_range',dateRange).set('id',device_id)
         }
       )
       .pipe(

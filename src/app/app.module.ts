@@ -49,6 +49,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { ConsumptionCurrentModule } from './consumption/consumption-current/consumption-current.module';
 import { ConsumptionOverallModule } from './consumption/consumption-overall/consumption-overall.module';
+import { LineChartComponent } from './shared/line-chart/line-chart.component';
+import { ConsumptionComponent } from './consumption/consumption.component';
+import { ConsumptionModule } from './consumption/consumption.module';
 
 @NgModule({
   imports: [
@@ -65,8 +68,6 @@ import { ConsumptionOverallModule } from './consumption/consumption-overall/cons
     TabsModule.forRoot(),
     ChartsModule,
     IconModule,
-    ConsumptionCurrentModule,
-    ConsumptionOverallModule,
     IconSetModule.forRoot(),
     HttpClientModule,
     FormsModule,

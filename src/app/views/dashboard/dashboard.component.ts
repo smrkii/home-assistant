@@ -15,8 +15,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private devicesService: DevicesService) {
     if (localStorage.getItem("devices"))
       this.devices = JSON.parse(localStorage.getItem("devices"));
-
-
   }
 
   ngOnInit(): void {

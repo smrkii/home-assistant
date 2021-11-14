@@ -77,6 +77,11 @@ export const navItems: INavData[] = [
     icon: 'cil-chart'
   },
   {
+    name: 'Devices',
+    url: '/consumption/devices',
+    icon: 'cil-chart'
+  },
+  {
     name: 'Overall',
     url: '/consumption/overall',
     icon: 'cil-chart'
