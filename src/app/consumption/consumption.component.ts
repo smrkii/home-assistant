@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, OnInit } from "@angular/core";
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { ChartDataSets } from "chart.js";
 import { Label } from "ng2-charts";
 import { ToastrService } from "ngx-toastr";
+import { ignoreElements } from "rxjs/operators";
 import { ConsumptionService } from "./consumption.service";
 
 @Component({
@@ -9,7 +10,7 @@ import { ConsumptionService } from "./consumption.service";
   templateUrl: "./consumption.component.html",
   styleUrls: ["./consumption.component.scss"],
 })
-export class ConsumptionComponent implements OnInit, OnChanges {
+export class ConsumptionComponent implements OnChanges {
   @Input() interval: string = "year";
   @Input() device_id: string = null;
   @Input() showTableData: boolean = true;
@@ -17,9 +18,10 @@ export class ConsumptionComponent implements OnInit, OnChanges {
   @Input() mergeAllDevice: boolean = false;
   data: any = {};
   devices: any = {};
+  lineTitle: string = '';
 
-  public lineChartData: ChartDataSets[] = [];
-  public lineChartLabels: Label[] = [];
+  public lineChartData: ChartDataSets[];
+  public lineChartLabels: Label[];
   monthNames = [
     "January",
     "February",
@@ -40,7 +42,10 @@ export class ConsumptionComponent implements OnInit, OnChanges {
     private toastr: ToastrService
   ) {}
 
-  ngOnInit(): void {
+
+
+  ngOnChanges(): void {
+    this.lineChartData = [];
     this.devices = JSON.parse(localStorage.getItem("devices"));
     if (this.device_id !== null) {
       this.getDeviceConsumption(this.interval, this.device_id);
@@ -52,16 +57,7 @@ export class ConsumptionComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges() {
-    this.devices = JSON.parse(localStorage.getItem("devices"));
-    if (this.device_id !== null) {
-      this.getDeviceConsumption(this.interval, this.device_id);
-    }else if(this.mergeAllDevice){
-      this.getMergedDevicesConsumption(this.interval);
-    } else {
-      this.getOverallConsumption(this.interval);
-    }
-  }
+
 
   getOverallConsumption(interval: string) {
     this.consumptionService.getOverallConsumption(interval).subscribe(
@@ -106,13 +102,13 @@ export class ConsumptionComponent implements OnInit, OnChanges {
   }
 
   getMergedDevicesConsumption(interval: string) {
-    this.devices = JSON.parse(localStorage.getItem("devices"));
-
      for (const [key, value] of Object.entries(this.devices)) {
-      this.consumptionService.getDeviceConsumption(interval, this.devices[key].props.id).subscribe(
+
+
+       this.consumptionService.getDeviceConsumption(interval, this.devices[key].props.id).subscribe(
         (response) => {
           this.data = response;
-
+          this.lineTitle = this.devices[key].props.name
           if (interval == "day") {
             this.prepareDaylyGraph();
           } else if (interval == "week") {
@@ -127,9 +123,8 @@ export class ConsumptionComponent implements OnInit, OnChanges {
           this.toastr.error(error.message, "Toastr fun!");
         }
       );
+
     }
-
-
   }
 
   prepareYearlyGraph() {
@@ -143,7 +138,10 @@ export class ConsumptionComponent implements OnInit, OnChanges {
       data[i] = this.data.data.history[i].consumption;
       labels[i] = date.getFullYear() + " " + this.monthNames[date.getMonth()];
     }
-    this.lineChartData[0] = {data, label:'Wh'};
+
+
+
+    this.lineChartData[this.lineChartData.length] = {data, label:this.lineTitle};
     this.lineChartLabels = labels;
 
   }
@@ -161,8 +159,7 @@ export class ConsumptionComponent implements OnInit, OnChanges {
       labels[i] =
         date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
     }
-    this.lineChartData[0].data = data;
-    this.lineChartData[0].label = "Wh";
+    this.lineChartData[this.lineChartData.length] = {data, label:this.lineTitle};
     this.lineChartLabels = labels;
 
 
@@ -180,8 +177,7 @@ export class ConsumptionComponent implements OnInit, OnChanges {
       labels[i] =
         date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
     }
-    this.lineChartData[0].data = data;
-    this.lineChartData[0].label = "Wh";
+    this.lineChartData[this.lineChartData.length] = {data, label:this.lineTitle};
     this.lineChartLabels = labels;
 
   }
@@ -194,8 +190,7 @@ export class ConsumptionComponent implements OnInit, OnChanges {
       labels[i] = this.data.data.history[i].datetime;
       data[i] = this.data.data.history[i].consumption;
     }
-    this.lineChartData[0].data = data;
-    this.lineChartData[0].label = "Wh";
+    this.lineChartData[this.lineChartData.length] = {data, label:this.lineTitle};
     this.lineChartLabels = labels;
 
   }
