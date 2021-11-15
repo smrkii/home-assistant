@@ -2,7 +2,7 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Dashboard',
+    name: 'Controll panel',
     url: '/dashboard',
     icon: 'cil-equalizer',
     /* badge: {
@@ -12,8 +12,20 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Devices'
+    name: 'Devices',
   },
+  {
+    name: 'Manage',
+    url: '/devices/manage',
+    icon: 'cil-equalizer'
+  },
+  {
+    name: 'Edit',
+    url: '/devices/edit',
+    icon: 'cil-pen'
+  },
+
+  /*
   {
     name: 'Edit',
     url: '/devices/edit',
@@ -36,6 +48,7 @@ export const navItems: INavData[] = [
       }
     ]
   },
+  */
   /* {
     name: 'Consumption',
     url: '/theme/colors',
@@ -46,6 +59,16 @@ export const navItems: INavData[] = [
     name: 'Groups',
   },
   {
+    name: 'Manage',
+    url: '/groups/manage',
+    icon: 'cil-equalizer'
+  },
+  {
+    name: 'Edit',
+    url: '/groups/edit',
+    icon: 'cil-pen'
+  },
+  /* {
     name: 'Edit',
     url: '/groups/edit',
     icon: 'cil-pen',
@@ -66,7 +89,7 @@ export const navItems: INavData[] = [
         icon: 'cil-minus'
       }
     ]
-  },
+  }, */
   {
     title: true,
     name: 'Consumption panel'

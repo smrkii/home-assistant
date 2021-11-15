@@ -18,6 +18,7 @@ export class LineChartComponent implements OnInit{
 
   ngOnInit(){
     this.lineChartOptions.title.text = this.title;
+
   }
 
 

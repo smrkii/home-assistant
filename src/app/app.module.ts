@@ -47,11 +47,8 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { ConsumptionCurrentModule } from './consumption/consumption-current/consumption-current.module';
-import { ConsumptionOverallModule } from './consumption/consumption-overall/consumption-overall.module';
-import { LineChartComponent } from './shared/line-chart/line-chart.component';
-import { ConsumptionComponent } from './consumption/consumption.component';
-import { ConsumptionModule } from './consumption/consumption.module';
+import { DeleteAlertComponent } from './shared/delete-alert/delete-alert.component';
+
 
 @NgModule({
   imports: [
@@ -85,7 +82,8 @@ import { ConsumptionModule } from './consumption/consumption.module';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DeleteAlertComponent
   ],
   providers: [
     {
