@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteAlertComponent } from '../../shared/delete-alert/delete-alert.component';
 import { DevicesService } from '../devices.service';
+import { AddNewModalComponent } from './add-new-modal/add-new-modal.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-edit',
@@ -10,6 +12,8 @@ import { DevicesService } from '../devices.service';
 })
 export class EditComponent implements OnInit {
   devices = {};
+  inEdit: boolean = false;
+
 
   constructor(private devicesService: DevicesService,
     private modalService: NgbModal,
@@ -25,7 +29,7 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openStatusModal(){
+  openDeleteAlertModal(){
     const modal = this.modalService.open(DeleteAlertComponent);
     modal.componentInstance.deviceId = 'TEST'
 
@@ -38,5 +42,28 @@ export class EditComponent implements OnInit {
     });
 
   }
+
+  openEditModal(){
+    const modal = this.modalService.open(EditModalComponent);
+    modal.componentInstance.deviceId = 'TEST'
+
+    modal.result.then((data) => {
+      console.log(data);
+
+    }, (reason) => {
+      console.log(reason);
+      // on dismiss
+    });
+
+  }
+
+  startEdit(){
+    this.inEdit = true;
+  }
+
+  stopEdit(){
+    this.inEdit = false;
+  }
+
 
 }

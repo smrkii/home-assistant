@@ -1,1 +1,23 @@
-// Here you can add other styles
+/* Mandatory */
+@import '~ng-wizard/themes/ng_wizard.min.css';
+
+/* Optional */
+/* If a theme other than default is used, the css file for that theme is required. */
+@import '~ng-wizard/themes/ng_wizard_theme_arrows.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_circles.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_dots.min.css';
+
+/* ng-wizard */
+@media only screen and (max-width: 1200px) {
+.ng-wizard-main.ng-wizard-theme-dots {
+  li.nav-item:not(.active){
+
+      display:none;
+
+  }
+
+  .ng-wizard-container {
+    min-height: 300
+}
+}
+}
