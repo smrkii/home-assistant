@@ -36,9 +36,6 @@ export class DevicesService {
             console.log(error);
           }
         )
-
-
-
       },
       (error) => {
         console.log(error);

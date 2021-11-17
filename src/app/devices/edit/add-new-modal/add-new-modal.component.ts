@@ -1,6 +1,8 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit, Output,EventEmitter  } from '@angular/core';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
 import { of } from 'rxjs';
+import { ShellyApiService } from '../../../shared/shelly-api.service';
 
 @Component({
   selector: 'app-add-new-modal',
@@ -10,6 +12,8 @@ import { of } from 'rxjs';
 export class AddNewModalComponent implements OnInit {
   @Input() deviceId: string;
   @Output() editStatus = new EventEmitter<boolean>()
+
+  stepIndex: number = 0;
 
   stepStates = {
     normal: STEP_STATE,
@@ -26,23 +30,67 @@ export class AddNewModalComponent implements OnInit {
     theme: THEME.dots,
     toolbarSettings: {
       toolbarExtraButtons: [
-        { text: 'Finnish', class: 'btn btn-info', event: () => { alert("Finished!!!"); } }
+        { text: 'Next', class: 'btn btn-primary', event: () => { this.onNext(); } }
       ],
     }
   };
 
 
   constructor(
-    private ngWizardService: NgWizardService
+    private ngWizardService: NgWizardService,
+    private shellyApi: ShellyApiService
    ) { }
 
 
-    stopEdit(){
-      this.editStatus.emit(false);
+    onNext(){
+      console.log(this.ngWizardService);
+
+      if(this.stepIndex === 0){
+        console.log(this.stepIndex);
+        this.stepIndex= 1;
+        this.shellyApi.testLocalDeviceConnecton().subscribe(
+          (response) => {
+            this.ngWizardService.next();
+              console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+      }else if(this.stepIndex === 1){
+        console.log(this.stepIndex);
+        this.stepIndex= 2;
+        this.ngWizardService.next()
+      }else if(this.stepIndex === 2){
+        console.log(this.stepIndex);
+        this.ngWizardService.next()
+      }
     }
+
+  stopEdit(){
+    this.editStatus.emit(false);
+  }
+
+  checkIfConnectionIsEtablished(){
+    this.shellyApi.testLocalDeviceConnecton().subscribe(
+      (response) => {
+          console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
 
 
   ngOnInit(): void {
+
+    this.ngWizardService.stepChanged().subscribe((args: StepChangedArgs) => {
+      return false;
+
+    });
   }
 
   showPreviousStep(event?: Event) {
@@ -63,11 +111,7 @@ export class AddNewModalComponent implements OnInit {
     this.ngWizardService.theme(theme);
   }
 
-  stepChanged(args: StepChangedArgs) {
-    this.ngWizardService.previous()
-    //args.step.initialStatus = STEP_STATUS.untouched;
-    console.log(args.step);
-  }
+
 
   isValidTypeBoolean: boolean = true;
 

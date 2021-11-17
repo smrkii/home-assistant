@@ -220,4 +220,17 @@ export class ShellyApiService {
         })
       );
   }
+
+  testLocalDeviceConnecton() {
+    return this.http
+      .get<ConsumptionOverall>("http://192.168.33.1/settings")
+      .pipe(
+        map((response) => {
+
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
 }

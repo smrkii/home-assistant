@@ -8,16 +8,30 @@
       <ng-wizard [config]="config" >
 
         <ng-wizard-step [title]="'Step 1'" [description]="'Connect to device wifi'"
-          [canEnter]="isValidTypeBoolean" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
-          <div>Connect to device</div>
+          >
+          <div>
+            <div class="row">
+              <div class="col">
+                At first you should be connected to device. Select device wifi and connect on it.
+              </div>
+            </div>
+              <div class="row">
+                <div class="col">
+                  <img src="assets/img/Screenshot_1.png" alt="..." class="rounded mx-auto d-block">
+                </div>
+              </div>
+
+
+
+          </div>
         </ng-wizard-step>
 
-        <ng-wizard-step [title]="'Step 2'" [description]="'Connect device to existing WIFI'">
+        <ng-wizard-step  [title]="'Step 2'" [description]="'Connect device to existing WIFI'">
           <div>Connect to WIFI</div>
         </ng-wizard-step>
 
         <ng-wizard-step [title]="'Step 3'" [description]="'Edit'"
-          [canEnter]="isValidFunctionReturnsObservable.bind(this)" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+          >
           <div>Edit</div>
         </ng-wizard-step>
       </ng-wizard>
