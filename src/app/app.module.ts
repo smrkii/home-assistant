@@ -48,9 +48,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { DeleteAlertComponent } from './shared/delete-alert/delete-alert.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   imports: [
+    NgxSpinnerModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

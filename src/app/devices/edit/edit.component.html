@@ -22,13 +22,34 @@
             <td>{{ device.value.props.name }}</td>
             <td>{{ device.value.props.type }}</td>
             <td>
-              <button
-                (click)="openEditModal()"
+              <button *ngIf="device.value.props.type == 'SHSW-PM'"
+                (click)="openSwitchEditModal(device.value.props.id)"
                 type="button"
                 class="btn btn-primary"
               >
                 <i class="fa fa fa-pencil"></i>&nbsp;Edit
               </button>
+
+              <button *ngIf="device.value.props.type == 'SHRGBW2'"
+                (click)="openRgbControllerEditModal(device.value.props.id)"
+                type="button"
+                class="btn btn-primary"
+              >
+                <i class="fa fa fa-pencil"></i>&nbsp;Edit
+              </button>
+
+              <button *ngIf="device.value.props.type == 'SHHT-1'"
+                (click)="openShht1EditModal(device.value.props.id)"
+                type="button"
+                class="btn btn-primary"
+              >
+                <i class="fa fa fa-pencil"></i>&nbsp;Edit
+              </button>
+
+
+
+
+
               <button
                 (click)="openDeleteAlertModal()"
                 type="button"

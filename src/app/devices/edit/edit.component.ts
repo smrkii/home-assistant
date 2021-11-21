@@ -2,8 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteAlertComponent } from '../../shared/delete-alert/delete-alert.component';
 import { DevicesService } from '../devices.service';
+import { SwitchEditComponent } from '../switch/switch-edit/switch-edit.component';
 import { AddNewModalComponent } from './add-new-modal/add-new-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { NgForm } from '@angular/forms';
+import { SwitchStatusComponent } from '../switch/switch-status/switch-status.component';
+import { RgbControllerEditComponent } from '../rgb-controller/rgb-controller-edit/rgb-controller-edit.component';
+import { Shht1EditComponent } from '../shht1/shht1-edit/shht1-edit.component';
 
 @Component({
   selector: 'app-edit',
@@ -56,6 +61,49 @@ export class EditComponent implements OnInit {
     });
 
   }
+
+  openSwitchEditModal(deviceId: string){
+    const modal = this.modalService.open(SwitchEditComponent);
+    modal.componentInstance.deviceId = deviceId
+
+    modal.result.then((data) => {
+      console.log(data);
+
+    }, (reason) => {
+      console.log(reason);
+      // on dismiss
+    });
+  }
+
+  openRgbControllerEditModal(deviceId: string){
+    const modal = this.modalService.open(RgbControllerEditComponent);
+    modal.componentInstance.deviceId = deviceId
+
+    modal.result.then((data) => {
+      console.log(data);
+
+    }, (reason) => {
+      console.log(reason);
+      // on dismiss
+    });
+
+  }
+
+  openShht1EditModal(deviceId: string){
+    const modal = this.modalService.open(Shht1EditComponent);
+    modal.componentInstance.deviceId = deviceId
+
+    modal.result.then((data) => {
+      console.log(data);
+
+    }, (reason) => {
+      console.log(reason);
+      // on dismiss
+    });
+
+  }
+
+
 
   startEdit(){
     this.inEdit = true;

@@ -7,11 +7,13 @@ import { RgbControllerComponent } from './rgb-controller.component';
 import { NgxColorsModule } from 'ngx-colors';
 import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
 import { RgbControllerStatusComponent } from './rgb-controller-status/rgb-controller-status.component';
+import { RgbControllerEditComponent } from './rgb-controller-edit/rgb-controller-edit.component';
 
 @NgModule({
   declarations: [
     RgbControllerComponent,
-    RgbControllerStatusComponent
+    RgbControllerStatusComponent,
+    RgbControllerEditComponent
   ],
   imports: [
     RouterModule,

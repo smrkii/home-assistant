@@ -7,6 +7,10 @@ import { DevicesEditRoutnigModule } from './devices-edit-routing.module';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { AddNewModalComponent } from './add-new-modal/add-new-modal.component';
 import { AddNewModalModule } from './add-new-modal/add-new-modal.module';
+import { SwitchModule } from '../switch/switch.module';
+import { RgbControllerModule } from '../rgb-controller/rgb-controller.module';
+import { Shht1Component } from '../shht1/shht1.component';
+import { Shht1Module } from '../shht1/shht1.module';
 
 
 @NgModule({
@@ -19,7 +23,10 @@ import { AddNewModalModule } from './add-new-modal/add-new-modal.module';
     CommonModule,
     FormsModule,
     DevicesEditRoutnigModule,
-    AddNewModalModule
+    AddNewModalModule,
+    SwitchModule,
+    RgbControllerModule,
+    Shht1Module
   ],
   exports:[]
 })

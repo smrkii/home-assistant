@@ -57,6 +57,7 @@
     "ngx-bootstrap-slider": "^1.9.0",
     "ngx-colors": "^2.9.0",
     "ngx-perfect-scrollbar": "^10.1.0",
+    "ngx-spinner": "^11.0.2",
     "ngx-toastr": "^14.1.4",
     "popper.js": "^1.16.1",
     "rxjs": "^6.6.6",

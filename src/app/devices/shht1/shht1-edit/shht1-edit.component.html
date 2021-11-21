@@ -1,0 +1,321 @@
+<div class="modal-header">
+  <div class="row">
+    <div class="col"><h4 class="modal-title">Edit</h4></div>
+  </div>
+
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #f="ngForm">
+    <!--Accordion wrapper-->
+    <div
+      class="accordion md-accordion"
+      id="accordionEx"
+      role="tablist"
+      aria-multiselectable="true"
+    >
+      <!-- Accordion card -->
+      <div class="card" ngModelGroup="unit_group" #unit_group="ngModelGroup">
+        <!-- Card header -->
+        <div
+          class="card-header"
+          role="tab"
+          id="headingOne1"
+          style="cursor: pointer"
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseOne1"
+          aria-expanded="true"
+          aria-controls="collapseOne1"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Temperature unit</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
+        <!-- Card body -->
+        <div
+          id="collapseOne1"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingOne1"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col-1">
+                <input
+                  ngModel
+                  type="radio"
+                  id="f"
+                  name="temperature_unit"
+                  value="f"
+                  (click)="onTemperatureUnitChanged($event)"
+                />
+              </div>
+              <div class="col-11"><label for="f">F</label><br /></div>
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <input
+                  ngModel
+                  type="radio"
+                  id="c"
+                  name="temperature_unit"
+                  value="c"
+                  (click)="onTemperatureUnitChanged($event)"
+                />
+              </div>
+              <div class="col-11"><label for="c">C</label><br /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Accordion card -->
+
+      <!-- Accordion card -->
+      <div
+        class="card"
+        ngModelGroup="temperature_treshold_group"
+        #temperature_treshold_group="ngModelGroup"
+      >
+        <!-- Card header -->
+        <div
+          class="card-header"
+          role="tab"
+          id="headingTwo2"
+          style="cursor: pointer"
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseTwo2"
+          aria-expanded="true"
+          aria-controls="collapseTwo2"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Temperature treshold</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
+
+        <!-- Card body -->
+        <div
+          id="collapseTwo2"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingTwo2"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="temperature_treshold"
+                    >Wakeup and report status if temperature changes by
+                    threshold:</label
+                  >
+                  <input
+                  name="temperature_treshold"
+                  ngModel
+                  type="number"
+                  class="form-control"
+                  id="temperature_treshold"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter treshold"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-right">
+                <button
+                  (click)="onTemperatureTresholdChanged()"
+                  class="btn btn-primary"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Accordion card -->
+      <!-- Accordion card -->
+      <div
+        class="card"
+        ngModelGroup="humidity_treshold_group"
+        #humidity_treshold_group="ngModelGroup"
+      >
+        <!-- Card header -->
+        <div
+          class="card-header"
+          role="tab"
+          id="headingThree3"
+          style="cursor: pointer"
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseThree3"
+          aria-expanded="true"
+          aria-controls="collapseThree3"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Humidity treshold</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
+
+        <!-- Card body -->
+        <div
+          id="collapseThree3"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingThree3"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="humidity_treshold"
+                    >Wakeup and report status if humidity changes by threshold:</label
+                  >
+                  <input
+                  #humidity_treshold="ngModel"
+                  name="humidity_treshold"
+                  ngModel
+                  type="number"
+                  class="form-control"
+                  id="humidity_treshold"
+                  placeholder="Enter treshold"
+                  min="0.5"
+                  max="50.1"
+                  [ngClass] = "{'is-invalid' : !humidity_treshold.valid && humidity_treshold.touched}"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-right">
+                <button
+                  (click)="onHumidityTresholdChanged()"
+                  class="btn btn-primary"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion card -->
+      <div
+        class="card"
+        ngModelGroup="offset_group"
+        #offset_group="ngModelGroup"
+      >
+        <!-- Card header -->
+        <div
+          class="card-header"
+          role="tab"
+          id="headingFive5"
+          style="cursor: pointer"
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseFive5"
+          aria-expanded="true"
+          aria-controls="collapseFive5"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Offset</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
+
+        <!-- Card body -->
+        <div
+          id="collapseFive5"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingFive5"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="temperature_offset"
+                    >Temperature offset:</label
+                  >
+                  <input
+                  name="temperature_offset"
+                  ngModel
+                  type="number"
+                  class="form-control"
+                  id="temperature_offset"
+                  placeholder="Enter offset"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="humidity_offset"
+                    >Humidity offset:</label
+                  >
+                  <input
+                  name="humidity_offset"
+                  ngModel
+                  type="number"
+                  class="form-control"
+                  id="humidity_offset"
+                  placeholder="Enter offset"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-right">
+                <button
+                  (click)="onOffsetChanged()"
+                  class="btn btn-primary"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Accordion card -->
+    </div>
+    <!-- Accordion wrapper -->
+  </form>
+</div>

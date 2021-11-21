@@ -3,7 +3,6 @@ import { NgbActiveModal,NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { SwitchStatus } from '../../../../core/api/devices/shelly1/shelly1.model';
 import { ShellyApiService } from '../../../shared/shelly-api.service';
-import { CollapseDirective } from 'ngx-bootstrap/collapse';
 import { NgForm } from '@angular/forms';
 
 @Component({

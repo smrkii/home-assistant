@@ -1,0 +1,446 @@
+<div class="modal-header">
+  <div class="row">
+    <div class="col"><h4 class="modal-title">Edit</h4></div>
+  </div>
+
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #f="ngForm">
+    <!--Accordion wrapper-->
+    <div
+      class="accordion md-accordion"
+      id="accordionEx"
+      role="tablist"
+      aria-multiselectable="true"
+    >
+      <!-- Accordion card -->
+      <div
+        class="card"
+        ngModelGroup="power_on_default_mode_group"
+        #power_on_default_mode_group="ngModelGroup"
+      >
+        <!-- Card header -->
+        <div
+          class="card-header"
+          role="tab"
+          id="headingOne1"
+          style="cursor: pointer"
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseOne1"
+          aria-expanded="true"
+          aria-controls="collapseOne1"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Power on default mode</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
+        <!-- Card body -->
+        <div
+          id="collapseOne1"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingOne1"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col-1">
+                <input
+                  ngModel
+                  type="radio"
+                  id="on"
+                  name="power_on_default_mode"
+                  value="on"
+                  (click)="onPowerOnDefaultModeChanged($event)"
+                />
+              </div>
+              <div class="col-11">
+                <label for="on"
+                  >ON - Configure Shelly relay to Turn ON, when it has
+                  power.</label
+                ><br />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <input
+                  ngModel
+                  type="radio"
+                  id="off"
+                  name="power_on_default_mode"
+                  value="off"
+                  (click)="onPowerOnDefaultModeChanged($event)"
+                />
+              </div>
+              <div class="col-11">
+                <label for="off"
+                  >OFF - Configure Shelly relay to Turn OFF, when it has
+                  power.</label
+                ><br />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <input
+                  ngModel
+                  type="radio"
+                  id="last"
+                  name="power_on_default_mode"
+                  value="last"
+                  (click)="onPowerOnDefaultModeChanged($event)"
+                />
+              </div>
+              <div class="col-11">
+                <label for="last"
+                  >Restore Last Mode - Configure Shelly relay to Restore the
+                  last mode it was in, when it has power.</label
+                ><br />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Accordion card -->
+
+      <!-- Accordion card -->
+      <div
+        class="card"
+        ngModelGroup="button_type_group"
+        #button_type_group="ngModelGroup"
+      >
+        <!-- Card header -->
+        <div
+          class="card-header"
+          role="tab"
+          id="headingTwo2"
+          style="cursor: pointer"
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseTwo2"
+          aria-expanded="true"
+          aria-controls="collapseTwo2"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Button type</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
+
+        <!-- Card body -->
+        <div
+          id="collapseTwo2"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingTwo2"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col-1">
+                <input
+                  ngModel
+                  type="radio"
+                  id="momentary"
+                  name="button_type"
+                  value="momentary"
+                  (click)="onButtonTypeChanged($event)"
+                />
+              </div>
+              <div class="col-11">
+                <label for="momentary"
+                  >Momentary - Set Shelly device to be "Momentary" switch.
+                  Push-for "ON" or Push-for "OFF".</label
+                ><br />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <input
+                  ngModel
+                  type="radio"
+                  id="toggle"
+                  name="button_type"
+                  value="toggle"
+                  (click)="onButtonTypeChanged($event)"
+                />
+              </div>
+              <div class="col-11">
+                <label for="toggle"
+                  >Toggle Switch - Set Shelly device to be "Toggle" switch. Act
+                  as a flip switch with one state for "ON" and one state for
+                  "OFF".</label
+                ><br />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <input
+                  ngModel
+                  type="radio"
+                  id="edge"
+                  name="button_type"
+                  value="edge"
+                  (click)="onButtonTypeChanged($event)"
+                />
+              </div>
+              <div class="col-11">
+                <label for="edge"
+                  >Edge Switch - Set Shelly device to be "Edge" switch. Changes
+                  state on every hit.</label
+                ><br />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <input
+                ngModel
+                  type="radio"
+                  id="detached"
+                  name="button_type"
+                  value="detached"
+                  (click)="onButtonTypeChanged($event)"
+                />
+              </div>
+              <div class="col-11">
+                <label for="detached"
+                  >Detached Switch - Set Shelly device to be in "Detached"
+                  switch mode - switch is separated from the relays.</label
+                ><br />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Accordion card -->
+
+      <!-- Accordion card -->
+      <div class="card" ngModelGroup="timer_group" #timer_group="ngModelGroup">
+        <!-- Card header -->
+        <div
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseThree3"
+          aria-expanded="true"
+          class="card-header"
+          role="tab"
+          id="headingThree3"
+          style="cursor: pointer"
+          aria-controls="collapseThree3"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Timer</h5>
+            </div>
+            <!-- <div class="float-left">
+            <i class="btn btn-link" class={{iconCollapse}}></i>
+          </div> -->
+          </div>
+        </div>
+
+        <!-- Card body -->
+        <div
+          id="collapseThree3"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingThree3"
+          data-parent="#accordionEx"
+        >
+          <div class="card-body">
+            <!-- Accordion card -->
+            <div
+              class="card"
+              ngModelGroup="timer_group_on"
+              #timer_group_on="ngModelGroup"
+            >
+              <!-- Card header -->
+              <div
+                (click)="toggleCollapse()"
+                data-toggle="collapse"
+                data-parent="#accordionEx"
+                href="#collapseFour4"
+                aria-expanded="true"
+                class="card-header"
+                role="tab"
+                id="headingFour4"
+                style="cursor: pointer"
+                aria-controls="collapseFour4"
+              >
+                <div class="row">
+                  <div class="col">
+                    <h5 class="mb-0">Auto on</h5>
+                  </div>
+                  <!-- <div class="float-left">
+          <i class="btn btn-link" class={{iconCollapse}}></i>
+        </div> -->
+                </div>
+              </div>
+
+              <!-- Card body -->
+              <div
+                id="collapseThree3"
+                class="collapse"
+                role="tabpanel"
+                aria-labelledby="headingThree3"
+                data-parent="#accordionEx"
+              >
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-1">
+                      <input
+                        ngModel
+                        type="checkbox"
+                        id="auto_on"
+                        name="auto_on"
+                        value="AutoOn"
+                      />
+                    </div>
+                    <div class="col">
+                      <label for="auto_on"
+                        >When On - Turn On After {{auto_on_seconds.value}} seconds</label
+                      >
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <input
+                          #auto_on_seconds
+                          ngModel
+                          name="auto_on_seconds"
+                          type="number"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          placeholder="Enter seconds"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-right">
+                      <button
+                        (click)="onTimerOnChanged()"
+                        class="btn btn-primary"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Accordion card -->
+            <br />
+            <!-- Accordion card -->
+            <div
+              class="card"
+              ngModelGroup="timer_group_off"
+              #timer_group_off="ngModelGroup"
+            >
+              <!-- Card header -->
+              <div
+                (click)="toggleCollapse()"
+                data-toggle="collapse"
+                data-parent="#accordionEx"
+                href="#collapseFour4"
+                aria-expanded="true"
+                class="card-header"
+                role="tab"
+                id="headingFour4"
+                style="cursor: pointer"
+                aria-controls="collapseFour4"
+              >
+                <div class="row">
+                  <div class="col">
+                    <h5 class="mb-0">Auto off</h5>
+                  </div>
+                  <!-- <div class="float-left">
+          <i class="btn btn-link" class={{iconCollapse}}></i>
+        </div> -->
+                </div>
+              </div>
+
+              <!-- Card body -->
+              <div
+                id="collapseThree3"
+                class="collapse"
+                role="tabpanel"
+                aria-labelledby="headingThree3"
+                data-parent="#accordionEx"
+              >
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-1">
+                      <input
+                        ngModel
+                        type="checkbox"
+                        id="auto_off"
+                        name="auto_off"
+                        value="AutoOff"
+                      />
+                    </div>
+                    <div class="col">
+                      <label for="auto_off"
+                        >When Off - Turn Off After {{auto_off_seconds.value}} seconds</label
+                      >
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <input
+                          #auto_off_seconds
+                          ngModel
+                          name="auto_off_seconds"
+                          type="number"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          placeholder="Enter seconds"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-right">
+                      <button
+                        (click)="onTimerOffChanged()"
+                        class="btn btn-primary"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Accordion card -->
+          </div>
+        </div>
+      </div>
+      <!-- Accordion card -->
+    </div>
+    <!-- Accordion wrapper -->
+  </form>
+</div>

@@ -6,7 +6,7 @@ import {
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, throwError } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
+import { catchError, map, tap, timeout } from "rxjs/operators";
 import { ConsumptionOverall } from "../../core/api/consumption/consumption-overall.model";
 import { Device } from "../../core/api/devices/device.model";
 import { RgbwControllerStatus } from "../../core/api/devices/rgb-controller/rgb-controller.model";
@@ -221,16 +221,177 @@ export class ShellyApiService {
       );
   }
 
-  testLocalDeviceConnecton() {
+
+  postSwitchDefaultState(state: string,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("state", state);
+
     return this.http
-      .get<ConsumptionOverall>("http://192.168.33.1/settings")
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/relay/settings/default_state",
+        formData
+      )
       .pipe(
         map((response) => {
-
+          return response;
         }),
         catchError((error) => {
           return throwError(error); // From 'rxjs'
         })
       );
   }
+
+  postSwitchButtonType(type: string,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("type", type);
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/relay/settings/button_type",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  postSwitchTimer(timeout: string, device_id: string, state: string) {
+    var formData = new FormData();
+    formData.append("timeout", timeout);
+    formData.append("id", device_id);
+    formData.append("state", state);
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/relay/settings/auto_turn",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  postSetTemperatureUnit(unit: string,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("unit", unit);
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/sensor/settings/temperature",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  postTemperatureTreshold(treshold: number,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("threshold", treshold.toString());
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/sensor/settings/temperature_threshold",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  postHumidityTreshold(treshold: number,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("threshold", treshold.toString());
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/sensor/settings/humidity_threshold",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  postOffset(temperatureOff: number,humidityOff: number,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("tmp", temperatureOff.toString());
+    formData.append("hum", humidityOff.toString());
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/sensor/settings/set_offset",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+
+
+  testLocalDeviceConnecton() {
+    return this.http
+      .get<any>("http://192.168.33.1:80/settings")
+      .pipe(
+        timeout(3000),
+        catchError(e => {
+          return throwError(e);
+          //return of(null);
+        })
+
+    );
+  }
+
+
+  private getServerErrorMessage(error: HttpErrorResponse): string {
+    switch (error.status) {
+        case 404: {
+            return `Not Found: ${error.message}`;
+        }
+        case 403: {
+            return `Access Denied: ${error.message}`;
+        }
+        case 500: {
+            return `Internal Server Error: ${error.message}`;
+        }
+        default: {
+            return `Unknown Server Error: ${error.message}`;
+        }
+
+    }
 }
+}
+function of(arg0: null): any {
+  throw new Error("Function not implemented.");
+}
+

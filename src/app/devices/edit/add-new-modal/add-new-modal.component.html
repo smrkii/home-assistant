@@ -1,44 +1,57 @@
 <div class="row">
-  <button class="btn btn-primary" (click)="stopEdit()"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Back</button>
+  <button class="btn btn-primary" (click)="stopEdit()">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Back
+  </button>
 </div>
 <div class="row">
   <div class="col-3"></div>
   <div class="col-12 col-sm-6">
     <div d-flex justify-content-center>
-      <ng-wizard [config]="config" >
-
-        <ng-wizard-step [title]="'Step 1'" [description]="'Connect to device wifi'"
-          >
+      <ng-wizard [config]="config">
+        <ngx-spinner
+          color="#fff"
+          type="ball-clip-rotate-multiple"
+          [fullScreen]="false"
+          size="default"
+        >
+          <br /><br />
+          <p style="font-size: 20px; color: white">Trying to connect...</p>
+        </ngx-spinner>
+        <ng-wizard-step
+          [title]="'Step 1'"
+          [description]="'Connect to device wifi'"
+        >
           <div>
             <div class="row">
               <div class="col">
-                At first you should be connected to device. Select device wifi and connect on it.
+                At first you should be connected to device. Select device wifi
+                and connect on it.
               </div>
             </div>
-              <div class="row">
-                <div class="col">
-                  <img src="assets/img/Screenshot_1.png" alt="..." class="rounded mx-auto d-block">
-                </div>
+            <div class="row">
+              <div class="col">
+                <img
+                  src="assets/img/Screenshot_1.png"
+                  alt="..."
+                  class="rounded mx-auto d-block"
+                />
               </div>
-
-
-
+            </div>
           </div>
         </ng-wizard-step>
 
-        <ng-wizard-step  [title]="'Step 2'" [description]="'Connect device to existing WIFI'">
-          <div>Connect to WIFI</div>
+        <ng-wizard-step
+          [title]="'Step 2'"
+          [description]="'Connect device to existing WIFI'"
+        >
+          <div>Success</div>
         </ng-wizard-step>
 
-        <ng-wizard-step [title]="'Step 3'" [description]="'Edit'"
-          >
+        <ng-wizard-step [title]="'Step 3'" [description]="'Edit'">
           <div>Edit</div>
         </ng-wizard-step>
       </ng-wizard>
     </div>
-
   </div>
   <div class="col-3"></div>
 </div>
-
-

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AddNewModalComponent } from './add-new-modal.component';
 import { NgWizardConfig, NgWizardModule, THEME } from 'ng-wizard';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.default
@@ -20,6 +21,8 @@ const ngWizardConfig: NgWizardConfig = {
     RouterModule,
     CommonModule,
     FormsModule,
+
+    NgxSpinnerModule,
   ],
   exports:[AddNewModalComponent]
 })

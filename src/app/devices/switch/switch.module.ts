@@ -6,11 +6,13 @@ import { SwitchComponent } from './switch.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SwitchStatusComponent } from './switch-status/switch-status.component';
 import { FormsModule } from '@angular/forms';
+import { SwitchEditComponent } from './switch-edit/switch-edit.component';
 
 @NgModule({
   declarations: [
     SwitchComponent,
-    SwitchStatusComponent
+    SwitchStatusComponent,
+    SwitchEditComponent
   ],
   imports: [
     RouterModule,

@@ -5,6 +5,7 @@ import { Device } from '../../../core/api/devices/device.model';
 import { ChangeSwitch, SwitchStatus} from '../../../core/api/devices/shelly1/shelly1.model';
 import { ShellyApiService } from '../../shared/shelly-api.service';
 import { DevicesService } from '../devices.service';
+import { SwitchEditComponent } from './switch-edit/switch-edit.component';
 import { SwitchStatusComponent } from './switch-status/switch-status.component';
 
 @Component({
