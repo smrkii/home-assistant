@@ -165,7 +165,7 @@ export class ShellyApiService {
       .pipe(
         map((response) => {
           var dd: any = response;
-          return dd.data.devices;
+          return dd.data;
         }),
         catchError((error) => {
           return throwError(error); // From 'rxjs'

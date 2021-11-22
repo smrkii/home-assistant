@@ -1,0 +1,18 @@
+<div class="card text-white bg-success">
+  <div class="card-body pb-0">
+    <div class="btn-group float-right" dropdown>
+      <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+        <i class="icon-settings"></i>
+      </button>
+    </div>
+    <!-- <div class="text-value">9.823</div> -->
+    <div>{{this.groupProps.name}}</div>
+  </div>
+  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+    <label class="switch switch-label switch-success">
+      <input #switch type="checkbox" class="switch-input" (click)="onSwitchClick($event)">
+      <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+    </label>
+  </div>
+</div>
+

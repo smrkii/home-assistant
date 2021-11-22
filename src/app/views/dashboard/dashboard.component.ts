@@ -10,11 +10,17 @@ import { Subscription } from "rxjs";
 export class DashboardComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   devices = {};
+  groups = {};
   myInterval: any;
 
   constructor(private devicesService: DevicesService) {
     if (localStorage.getItem("devices"))
       this.devices = JSON.parse(localStorage.getItem("devices"));
+
+      console.log(localStorage.getItem("groups"));
+
+    if (localStorage.getItem("groups"))
+      this.groups = JSON.parse(localStorage.getItem("groups"));
   }
 
   ngOnInit(): void {
@@ -29,10 +35,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.devices = value;
     });
 
+
+    this.subscription = this.devicesService.groups.subscribe((value) => {
+      this.groups = value;
+    });
+
     this.myInterval = setInterval(() => {
       this.devicesService.getDevices();
     }, 5000);
-
   }
 
   ngOnDestroy() {

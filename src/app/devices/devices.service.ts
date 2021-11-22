@@ -8,6 +8,7 @@ import { ShellyApiService } from "../shared/shelly-api.service";
 })
 export class DevicesService {
   devices = new Subject<Object>();
+  groups = new Subject<Object>();
 
   constructor(private shellyApiService: ShellyApiService) {}
 
@@ -35,12 +36,13 @@ export class DevicesService {
     };
 
     var dev = {};
+    var groups = {};
 
     var savedDevices = JSON.parse(localStorage.getItem("devices"));
 
     this.shellyApiService.getDevicesProps().subscribe(
       (devicesResponse) => {
-        devicesProps = devicesResponse;
+        devicesProps = devicesResponse.devices;
 
         //device statuses
         this.shellyApiService.getDevicesStatus().subscribe(
@@ -142,18 +144,23 @@ export class DevicesService {
                   dcPower
                 };
               }
-
-
-
-
             });
+
+            this.groups.next(devicesResponse.groups)
+            localStorage.setItem("groups", JSON.stringify(devicesResponse.groups));
+
             this.devices.next(dev);
             localStorage.setItem("devices", JSON.stringify(dev));
+
+
           },
           (error) => {
             console.log(error);
           }
         );
+
+
+
       },
       (error) => {
         console.log(error);

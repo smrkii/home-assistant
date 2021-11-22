@@ -49,6 +49,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { DeleteAlertComponent } from './shared/delete-alert/delete-alert.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { GroupComponent } from './groups/group/group.component';
 
 @NgModule({
   imports: [

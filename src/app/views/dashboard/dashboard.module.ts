@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { SwitchModule } from '../../devices/switch/switch.module';
 import { Shht1Module } from '../../devices/shht1/shht1.module';
 import { RgbControllerModule } from '../../devices/rgb-controller/rgb-controller.module';
+import { GroupModule } from '../../groups/group/group.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { RgbControllerModule } from '../../devices/rgb-controller/rgb-controller
     CommonModule,
     SwitchModule,
     Shht1Module,
-    RgbControllerModule
+    RgbControllerModule,
+    GroupModule
   ],
   declarations: [ DashboardComponent]
 })
