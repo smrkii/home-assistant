@@ -21,6 +21,8 @@ export class DevicesService {
     var humidityTreshold: number = 0;
     var temperatureOffset: number = 0;
     var humidityOffset: number = 0;
+    var transitionTime: number = 0;
+    var dcPower: string = "0";
 
     var onTimer: {
       active: false;
@@ -117,7 +119,28 @@ export class DevicesService {
                 };
 
               }else if(props.type === "SHRGBW2"){
+                if(savedDevices !== null){
+                  powerOnDefaultMode = savedDevices[id].powerOnDefaultMode;
+                  buttonType = savedDevices[id].buttonType;
+                  transitionTime = savedDevices[id].transitionTime;
+                  dcPower = savedDevices[id].dcPower;
 
+                }else{
+                  powerOnDefaultMode = "last";
+                  buttonType = "edge";
+                  transitionTime = 0;
+                  dcPower = "0";
+                }
+
+
+                dev[id] = {
+                  props,
+                  status,
+                  powerOnDefaultMode,
+                  buttonType,
+                  transitionTime,
+                  dcPower
+                };
               }
 
 

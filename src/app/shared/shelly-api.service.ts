@@ -357,6 +357,81 @@ export class ShellyApiService {
       );
   }
 
+  postRgbwTransition(transition: number,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("time", transition.toString());
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/light/settings/transition_time",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  postDcPower(power: string,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("dcpower", power);
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/light/settings/dcpower",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  postLightDefaultState(state: string,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("state", state);
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/light/settings/default_state",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
+
+  postLightButtonType(type: string,device_id: string) {
+    var formData = new FormData();
+    formData.append("id", device_id);
+    formData.append("type", type);
+
+    return this.http
+      .post<ConsumptionOverall>("https://shelly-29-eu.shelly.cloud/device/light/settings/button_type",
+        formData
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return throwError(error); // From 'rxjs'
+        })
+      );
+  }
 
 
   testLocalDeviceConnecton() {

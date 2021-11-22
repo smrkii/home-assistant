@@ -37,15 +37,11 @@ export class RgbControllerEditComponent implements AfterViewInit {
         button_type_group:{
           button_type: devices[this.deviceId].buttonType
         },
-        timer_group:{
-          timer_group_on:{
-            auto_on:devices[this.deviceId].onTimer.active,
-            auto_on_seconds:devices[this.deviceId].onTimer.seconds
-          },
-          timer_group_off:{
-            auto_off:devices[this.deviceId].offTimer.active,
-            auto_off_seconds:devices[this.deviceId].offTimer.seconds
-          }
+        transition_time_group:{
+          transition_time: devices[this.deviceId].transitionTime
+        },
+        dc_power_group:{
+          dc_power: devices[this.deviceId].dcPower
         }
       })
     },0);
@@ -56,7 +52,7 @@ export class RgbControllerEditComponent implements AfterViewInit {
 
   onPowerOnDefaultModeChanged(value: Event){
     var devices = JSON.parse(localStorage.getItem('devices'));
-    this.shellyApi.postSwitchDefaultState((value.target as HTMLInputElement).value, this.deviceId).subscribe(
+    this.shellyApi.postLightDefaultState((value.target as HTMLInputElement).value, this.deviceId).subscribe(
       (response) => {
         devices[this.deviceId].powerOnDefaultMode = (value.target as HTMLInputElement).value
         localStorage.setItem("devices", JSON.stringify(devices));
@@ -70,7 +66,7 @@ export class RgbControllerEditComponent implements AfterViewInit {
 
   onButtonTypeChanged(value: Event){
     var devices = JSON.parse(localStorage.getItem('devices'));
-    this.shellyApi.postSwitchButtonType((value.target as HTMLInputElement).value, this.deviceId).subscribe(
+    this.shellyApi.postLightButtonType((value.target as HTMLInputElement).value, this.deviceId).subscribe(
       (response) => {
         devices[this.deviceId].buttonType = (value.target as HTMLInputElement).value
         localStorage.setItem("devices", JSON.stringify(devices));
@@ -82,52 +78,29 @@ export class RgbControllerEditComponent implements AfterViewInit {
     )
   }
 
-  onTimerOffChanged(){
+  onTransitionTimeChanged(){
     var devices = JSON.parse(localStorage.getItem('devices'));
 
-    var seconds: number = 0;
-    if(this.form.form.value.timer_group.timer_group_off.auto_off !== false){
-      seconds = this.form.form.value.timer_group.timer_group_off.auto_off_seconds
-    }
-
-
-    this.shellyApi.postSwitchTimer(
-      seconds.toString(),
-      this.deviceId,
-      "off"
-    ).subscribe(
+    this.shellyApi.postRgbwTransition(this.form.form.value.transition_time_group.transition_time, this.deviceId).subscribe(
       (response) => {
-        devices[this.deviceId].offTimer.active = this.form.form.value.timer_group.timer_group_off.auto_off
-        devices[this.deviceId].offTimer.seconds = this.form.form.value.timer_group.timer_group_off.auto_off_seconds
+        devices[this.deviceId].transitionTime = this.form.form.value.transition_time_group.transition_time
         localStorage.setItem("devices", JSON.stringify(devices));
 
-        this.toastr.success('Timer off set.', 'Success');
+        this.toastr.success('Transition changed.', 'Success');
       }, (error) => {
         this.toastr.error(error.message, 'Error');
       }
     )
   }
 
-  onTimerOnChanged(){
+  onDcPowerChanged(value: Event){
     var devices = JSON.parse(localStorage.getItem('devices'));
-
-    var seconds: number = 0;
-    if(this.form.form.value.timer_group.timer_group_on.auto_on !== false){
-      seconds = this.form.form.value.timer_group.timer_group_on.auto_on_seconds
-    }
-
-
-    this.shellyApi.postSwitchTimer(
-      seconds.toString(),
-      this.deviceId,
-      "on"
-    ).subscribe(
+    this.shellyApi.postDcPower((value.target as HTMLInputElement).value, this.deviceId).subscribe(
       (response) => {
-        devices[this.deviceId].onTimer.active = this.form.form.value.timer_group.timer_group_on.auto_on
-        devices[this.deviceId].onTimer.seconds = this.form.form.value.timer_group.timer_group_on.auto_on_seconds
+        devices[this.deviceId].dcPower = (value.target as HTMLInputElement).value
         localStorage.setItem("devices", JSON.stringify(devices));
 
-        this.toastr.success('Timer on set.', 'Success');
+        this.toastr.success('Dc power changed.', 'Success');
       }, (error) => {
         this.toastr.error(error.message, 'Error');
       }

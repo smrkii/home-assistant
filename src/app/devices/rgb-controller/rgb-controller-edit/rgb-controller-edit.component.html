@@ -213,7 +213,7 @@
             <div class="row">
               <div class="col-1">
                 <input
-                ngModel
+                  ngModel
                   type="radio"
                   id="detached"
                   name="button_type"
@@ -234,7 +234,11 @@
       <!-- Accordion card -->
 
       <!-- Accordion card -->
-      <div class="card" ngModelGroup="timer_group" #timer_group="ngModelGroup">
+      <div
+        class="card"
+        ngModelGroup="transition_time_group"
+        #transition_time_group="ngModelGroup"
+      >
         <!-- Card header -->
         <div
           (click)="toggleCollapse()"
@@ -250,15 +254,13 @@
         >
           <div class="row">
             <div class="col">
-              <h5 class="mb-0">Timer</h5>
+              <h5 class="mb-0">Transition time</h5>
             </div>
             <!-- <div class="float-left">
             <i class="btn btn-link" class={{iconCollapse}}></i>
           </div> -->
           </div>
         </div>
-
-        <!-- Card body -->
         <div
           id="collapseThree3"
           class="collapse"
@@ -267,176 +269,102 @@
           data-parent="#accordionEx"
         >
           <div class="card-body">
-            <!-- Accordion card -->
-            <div
-              class="card"
-              ngModelGroup="timer_group_on"
-              #timer_group_on="ngModelGroup"
-            >
-              <!-- Card header -->
-              <div
-                (click)="toggleCollapse()"
-                data-toggle="collapse"
-                data-parent="#accordionEx"
-                href="#collapseFour4"
-                aria-expanded="true"
-                class="card-header"
-                role="tab"
-                id="headingFour4"
-                style="cursor: pointer"
-                aria-controls="collapseFour4"
-              >
-                <div class="row">
-                  <div class="col">
-                    <h5 class="mb-0">Auto on</h5>
-                  </div>
-                  <!-- <div class="float-left">
-          <i class="btn btn-link" class={{iconCollapse}}></i>
-        </div> -->
-                </div>
-              </div>
-
-              <!-- Card body -->
-              <div
-                id="collapseThree3"
-                class="collapse"
-                role="tabpanel"
-                aria-labelledby="headingThree3"
-                data-parent="#accordionEx"
-              >
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-1">
-                      <input
-                        ngModel
-                        type="checkbox"
-                        id="auto_on"
-                        name="auto_on"
-                        value="AutoOn"
-                      />
-                    </div>
-                    <div class="col">
-                      <label for="auto_on"
-                        >When On - Turn On After {{auto_on_seconds.value}} seconds</label
-                      >
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <input
-                          #auto_on_seconds
-                          ngModel
-                          name="auto_on_seconds"
-                          type="number"
-                          class="form-control"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter seconds"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col text-right">
-                      <button
-                        (click)="onTimerOnChanged()"
-                        class="btn btn-primary"
-                      >
-                        Save
-                      </button>
-                    </div>
-                  </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="transition_time">Transition time:</label>
+                  <input
+                    name="transition_time"
+                    ngModel
+                    type="number"
+                    class="form-control"
+                    id="humidity_offset"
+                    placeholder="Enter transition time"
+                    min="0"
+                  />
                 </div>
               </div>
             </div>
-            <!-- Accordion card -->
-            <br />
-            <!-- Accordion card -->
-            <div
-              class="card"
-              ngModelGroup="timer_group_off"
-              #timer_group_off="ngModelGroup"
-            >
-              <!-- Card header -->
-              <div
-                (click)="toggleCollapse()"
-                data-toggle="collapse"
-                data-parent="#accordionEx"
-                href="#collapseFour4"
-                aria-expanded="true"
-                class="card-header"
-                role="tab"
-                id="headingFour4"
-                style="cursor: pointer"
-                aria-controls="collapseFour4"
-              >
-                <div class="row">
-                  <div class="col">
-                    <h5 class="mb-0">Auto off</h5>
-                  </div>
-                  <!-- <div class="float-left">
-          <i class="btn btn-link" class={{iconCollapse}}></i>
-        </div> -->
-                </div>
-              </div>
-
-              <!-- Card body -->
-              <div
-                id="collapseThree3"
-                class="collapse"
-                role="tabpanel"
-                aria-labelledby="headingThree3"
-                data-parent="#accordionEx"
-              >
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-1">
-                      <input
-                        ngModel
-                        type="checkbox"
-                        id="auto_off"
-                        name="auto_off"
-                        value="AutoOff"
-                      />
-                    </div>
-                    <div class="col">
-                      <label for="auto_off"
-                        >When Off - Turn Off After {{auto_off_seconds.value}} seconds</label
-                      >
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <input
-                          #auto_off_seconds
-                          ngModel
-                          name="auto_off_seconds"
-                          type="number"
-                          class="form-control"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter seconds"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col text-right">
-                      <button
-                        (click)="onTimerOffChanged()"
-                        class="btn btn-primary"
-                      >
-                        Save
-                      </button>
-                    </div>
-                  </div>
-                </div>
+            <div class="row">
+              <div class="col text-right">
+                <button (click)="onTransitionTimeChanged()" class="btn btn-primary">Save</button>
               </div>
             </div>
-            <!-- Accordion card -->
           </div>
+        </div>
+      </div>
+      <!-- Accordion card -->
+      <!-- Accordion card -->
+      <div
+        class="card"
+        ngModelGroup="dc_power_group"
+        #dc_power_group="ngModelGroup"
+      >
+        <!-- Card header -->
+        <div
+          (click)="toggleCollapse()"
+          data-toggle="collapse"
+          data-parent="#accordionEx"
+          href="#collapseFour4"
+          aria-expanded="true"
+          class="card-header"
+          role="tab"
+          id="headingFour4"
+          style="cursor: pointer"
+          aria-controls="collapseFour4"
+        >
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Dc power</h5>
+            </div>
+            <!-- <div class="float-left">
+    <i class="btn btn-link" class={{iconCollapse}}></i>
+  </div> -->
+          </div>
+        </div>
+        <div
+          id="collapseFour4"
+          class="collapse"
+          role="tabpanel"
+          aria-labelledby="headingFour4"
+          data-parent="#accordionEx"
+        >
+        <div class="card-body">
+          <div class="row">
+            <div class="col-1">
+              <input
+                ngModel
+                type="radio"
+                id="12v"
+                name="dc_power"
+                value="0"
+                (click)="onDcPowerChanged($event)"
+              />
+            </div>
+            <div class="col-11">
+              <label for="off"
+                >12v</label
+              ><br />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-1">
+              <input
+                ngModel
+                type="radio"
+                id="24v"
+                name="dc_power"
+                value="1"
+                (click)="onDcPowerChanged($event)"
+              />
+            </div>
+            <div class="col-11">
+              <label for="last"
+                >24v</label
+              >
+            </div>
+          </div>
+        </div>
         </div>
       </div>
       <!-- Accordion card -->
