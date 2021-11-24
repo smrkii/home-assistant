@@ -1,18 +1,38 @@
 <div class="card text-white bg-success">
   <div class="card-body pb-0">
-    <div class="btn-group float-right" dropdown>
-      <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
-        <i class="icon-settings"></i>
-      </button>
-    </div>
-    <!-- <div class="text-value">9.823</div> -->
-    <div>{{this.groupProps.name}}</div>
-  </div>
-  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-    <label class="switch switch-label switch-success">
-      <input #switch type="checkbox" class="switch-input" (click)="onSwitchClick($event)">
-      <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-    </label>
-  </div>
-</div>
 
+    <!-- <div class="text-value">9.823</div> -->
+    <div>{{ this.groupProps.name }}</div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-5">
+      <div class="chart-wrapper mt-3 mx-3" style="height: 70px">
+
+        <label class="switch switch-label switch-success">
+          <input
+            #switch
+            type="checkbox"
+            class="switch-input"
+            (click)="onSwitchClick($event)"
+          />
+          <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+        </label>
+      </div>
+    </div>
+
+    <div *ngFor="let device of groupDevices" class="col-1">
+       <span *ngIf="device.status==true" style="font-size: 3em; color: rgb(255, 166, 0)">
+        <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+      </span>
+      <span *ngIf="device.status==false" style="font-size: 3em; color: rgb(5, 5, 5)">
+        <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+      </span>
+    </div>
+  </div>
+
+
+
+
+</div>

@@ -15,6 +15,7 @@ import {
   SwitchStatus,
 } from "../../core/api/devices/shelly1/shelly1.model";
 import { Shht1Status } from "../../core/api/devices/shht1/shht1.model";
+import { SwitchesGroup } from "../../core/api/groups/group.model";
 import { environment } from "../../environments/environment";
 import { ShellyUser } from "./shelly-user.model";
 
@@ -26,6 +27,19 @@ export class ShellyApiService {
   constructor(private http: HttpClient) {}
 
   relayControll(channel: number, turn: string, deviceId: string) {
+    var formData: any = new FormData();
+    formData.append("channel", channel);
+    formData.append("turn", turn);
+    formData.append("id", deviceId);
+    formData.append("auth_key", environment.shelly_auth_key);
+
+    return this.http.post<ChangeSwitch>(
+      environment.base_url + environment.endpoints[0].switch_controll,
+      formData
+    );
+  }
+
+  groupControll(channel: number, turn: string, deviceId: string) {
     var formData: any = new FormData();
     formData.append("channel", channel);
     formData.append("turn", turn);
@@ -431,6 +445,16 @@ export class ShellyApiService {
           return throwError(error); // From 'rxjs'
         })
       );
+  }
+
+  switchesGroupControl(devices: SwitchesGroup[], turn: string) {
+    var formData: any = new FormData();
+    formData.append("turn", turn);
+    formData.append("devices", JSON.stringify(devices));
+
+    return this.http.post<ChangeSwitch>("https://shelly-29-eu.shelly.cloud/device/relay/bulk_control",
+      formData
+    );
   }
 
 
