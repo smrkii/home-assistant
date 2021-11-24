@@ -1,0 +1,53 @@
+<div *ngIf="!inEdit">
+  <div class="d-flex flex-row-reverse">
+    <div class="p-2">
+      <button (click)="startEdit()" type="button" class="btn btn-success">
+        <i class="fa fa-plus"></i>&nbsp;Add new
+      </button>
+      <br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let group of groups | keyvalue">
+            <td>{{ group.value.name }}</td>
+            <td>{{ group.value.type }}</td>
+            <td>
+              <button
+                (click)="openSwitchEditModal(device.value.props.id)"
+                type="button"
+                class="btn btn-primary"
+              >
+                <i class="fa fa fa-pencil"></i>&nbsp;Edit
+              </button>
+              <button
+              (click)="openDeleteAlertModal()"
+              type="button"
+              class="btn btn-danger"
+            >
+              <i class="fa fa-trash-o"></i>&nbsp;Delete
+            </button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div *ngIf="inEdit">
+  <div class="row">
+    <div class="col">
+      <app-group-edit-modal (editStatus)="stopEdit()"></app-group-edit-modal>
+    </div>
+  </div>
+</div>

@@ -5,10 +5,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
 import { GroupComponent } from './group.component';
 import { GroupRoutingModule } from './group.routing';
+import { GroupEditComponent } from './group-edit/group-edit.component';
 
 @NgModule({
   declarations: [
-    GroupComponent
+    GroupComponent,
+
   ],
   imports: [
     RouterModule,

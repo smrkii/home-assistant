@@ -87,6 +87,10 @@ export const routes: Routes = [
         loadChildren: () => import('./devices/edit/devices-edit.module').then(m => m.DevicesEditModule)
       },
       {
+        path: 'groups/edit',
+        loadChildren: () => import('./groups/group/group-edit/group-edit.module').then(m => m.GroupEditModule)
+      },
+      {
         path: 'icons',
         loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
       },

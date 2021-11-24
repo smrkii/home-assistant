@@ -90,7 +90,7 @@ export const navItems: INavData[] = [
       }
     ]
   }, */
-  {
+  /* {
     title: true,
     name: 'Consumption panel'
   },
@@ -347,4 +347,5 @@ export const navItems: INavData[] = [
     variant: 'danger',
     attributes: { target: '_blank', rel: 'noopener' }
   }
+  */
 ];
