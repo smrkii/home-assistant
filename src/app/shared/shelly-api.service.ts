@@ -457,6 +457,15 @@ export class ShellyApiService {
     );
   }
 
+  createGroup(devices: SwitchesGroup[], name: string) {
+    var formData: any = new FormData();
+    formData.append("data", JSON.stringify({name:name,"devices":devices,"type":"relay","room_id":"-1"}));
+
+    return this.http.post<ChangeSwitch>("https://shelly-29-eu.shelly.cloud/interface/group/save",
+      formData
+    );
+  }
+
 
   testLocalDeviceConnecton() {
     return this.http

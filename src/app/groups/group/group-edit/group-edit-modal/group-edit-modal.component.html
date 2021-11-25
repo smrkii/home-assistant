@@ -6,6 +6,7 @@
 <div class="row">
   <div class="col-3"></div>
   <div class="col-12 col-sm-6">
+    <form #f="ngForm">
     <div d-flex justify-content-center>
       <ng-wizard [config]="config">
         <ngx-spinner
@@ -17,35 +18,97 @@
           <br /><br />
           <p style="font-size: 20px; color: white">Trying to connect...</p>
         </ngx-spinner>
-        <ng-wizard-step
-          [title]="'Step 1'"
-          [description]="'Choose group name'"
-        >
+        <ng-wizard-step [title]="'Step 1'" [description]="'Group name'">
           <div>
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="groupName">Name</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
-
+                  <input
+                    ngModel
+                    name="groupName"
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    placeholder="Enter group name"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </ng-wizard-step>
 
-        <ng-wizard-step
-          [title]="'Step 2'"
-          [description]="'Choose devices'"
-        >
-          <div>Success</div>
-        </ng-wizard-step>
+        <ng-wizard-step [title]="'Step 2'" [description]="'Choose devices'">
+          <div>
+            <div class="row justify-content-center">
+              <div class="col row justify-content-center">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary active">
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option1"
+                      autocomplete="off"
+                      (click)="selectedDevicesType='SHSW-PM'"
+                      checked
+                    />
+                    Relays
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option2"
+                      (click)="selectedDevicesType=''"
+                      autocomplete="off"
+                    />
+                    Rollers
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option3"
+                      autocomplete="off"
+                      (click)="selectedDevicesType='SHRGBW2'"
+                    />
+                    Lights
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
 
-        <ng-wizard-step [title]="'Step 3'" [description]="'Edit'">
-          <div>Edit</div>
+              <div class="col-8">
+                <br />
+                <table class="table">
+                  <tbody>
+                    <tr
+                      *ngFor="let item of devices | keyvalue"
+                      class="col-6 col-lg-3"
+                    >
+                      <td *ngIf="item.value.props.type === selectedDevicesType">
+                        <input
+                        ngModel
+                        name="test"
+                          class="form-check-input"
+                          type="checkbox"
+                          value="{{item.value.props.id}}"
+                          id="{{item.value.props.id}}"
+                        />
+                        <label class="form-check-label" for="{{item.value.props.id}}">
+                          {{ item.value.props.name }}
+                        </label>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </ng-wizard-step>
       </ng-wizard>
     </div>
+  </form>
   </div>
   <div class="col-3"></div>
 </div>

@@ -17,8 +17,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (localStorage.getItem("devices"))
       this.devices = JSON.parse(localStorage.getItem("devices"));
 
-      console.log(localStorage.getItem("groups"));
-
     if (localStorage.getItem("groups"))
       this.groups = JSON.parse(localStorage.getItem("groups"));
   }

@@ -1,5 +1,5 @@
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
-import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild } from "@angular/core";
 import {
   NgWizardConfig,
   NgWizardService,
@@ -12,15 +12,19 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
 import { of } from "rxjs";
 import { ShellyApiService } from "../../../../shared/shelly-api.service";
+import { FormsModule, NgForm } from "@angular/forms";
 
 @Component({
-  selector: 'app-group-edit-modal',
-  templateUrl: './group-edit-modal.component.html',
-  styleUrls: ['./group-edit-modal.component.scss']
+  selector: "app-group-edit-modal",
+  templateUrl: "./group-edit-modal.component.html",
+  styleUrls: ["./group-edit-modal.component.scss"],
 })
 export class GroupEditModalComponent implements OnInit {
   @Input() deviceId: string;
   @Output() editStatus = new EventEmitter<boolean>();
+  @ViewChild('f') form: NgForm;
+  devices = {};
+  selectedDevicesType: string = "SHSW-PM";
 
   stepIndex: number = 0;
 
@@ -37,10 +41,10 @@ export class GroupEditModalComponent implements OnInit {
     toolbarSettings: {
       toolbarExtraButtons: [
         {
-          text: "Next",
+          text: "Finnish",
           class: "btn btn-primary",
           event: () => {
-            this.onNext();
+            this.onFinnish();
           },
         },
       ],
@@ -51,17 +55,18 @@ export class GroupEditModalComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private ngWizardService: NgWizardService,
     private shellyApi: ShellyApiService,
-    private toastr: ToastrService,
-  ) {}
+    private toastr: ToastrService
+  ) {
+    if (localStorage.getItem("devices"))
+      this.devices = JSON.parse(localStorage.getItem("devices"));
+  }
 
-  onNext() {
-    console.log(this.ngWizardService);
+  onFinnish() {
+    console.log(this.form);
 
-    if (this.stepIndex === 0) {
-      this.spinner.show();
-      this.stepIndex = 1;
+    this.spinner.show();
 
-      this.shellyApi.testLocalDeviceConnecton().subscribe({
+     this.shellyApi.createGroup([],"").subscribe({
         next: data => {
           console.log(data);
           this.ngWizardService.next();
@@ -77,30 +82,15 @@ export class GroupEditModalComponent implements OnInit {
         }
     })
 
-
-
-
-
-    } else if (this.stepIndex === 1) {
-      console.log(this.stepIndex);
-      this.stepIndex = 2;
-      this.ngWizardService.next();
-    } else if (this.stepIndex === 2) {
-      console.log(this.stepIndex);
-      this.ngWizardService.next();
-    }
   }
 
   stopEdit() {
     this.editStatus.emit(false);
   }
 
-
-
   ngOnInit(): void {}
 
   showPreviousStep(event?: Event) {
-    console.log("BEFORE NEXT");
     this.ngWizardService.previous();
   }
 
@@ -123,5 +113,4 @@ export class GroupEditModalComponent implements OnInit {
   isValidFunctionReturnsObservable(args: StepValidationArgs) {
     return of(true);
   }
-
 }

@@ -21,29 +21,33 @@
       </div>
     </div> --><!--/.col-->
 
+    <div *ngFor="let item of groups | keyvalue" class="col-6 col-lg-3">
+      <app-group
+        [groupProps]="item.value" [devices]="this.devices"
+      ></app-group>
+    </div>
+
     <div *ngFor="let item of devices | keyvalue" class="col-6 col-lg-3">
       <app-switch
         *ngIf="item.value.props.type === 'SHSW-PM'"
         [deviceProps]="item.value.props"
         [deviceStatus]="item.value.status"
       ></app-switch>
-      <app-rgb-controller
-        *ngIf="item.value.props.type === 'SHRGBW2'"
-        [deviceProps]="item.value.props"
-        [deviceStatus]="item.value.status"
-      ></app-rgb-controller>
+
       <app-shht1
         *ngIf="item.value.props.type === 'SHHT-1'"
         [deviceProps]="item.value.props"
         [deviceStatus]="item.value.status"
       ></app-shht1>
+
+      <app-rgb-controller
+        *ngIf="item.value.props.type === 'SHRGBW2'"
+        [deviceProps]="item.value.props"
+        [deviceStatus]="item.value.status"
+      ></app-rgb-controller>
     </div>
 
-    <div *ngFor="let item of groups | keyvalue" class="col-6 col-lg-3">
-      <app-group
-        [groupProps]="item.value" [devices]="this.devices"
-      ></app-group>
-    </div>
+
 
     <!--/.col-->
   </div>

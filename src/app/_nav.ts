@@ -90,15 +90,15 @@ export const navItems: INavData[] = [
       }
     ]
   }, */
-  /* {
+   {
     title: true,
     name: 'Consumption panel'
   },
-  {
+  /* {
     name: 'Current',
     url: '/consumption/current',
     icon: 'cil-chart'
-  },
+  }, */
   {
     name: 'Devices',
     url: '/consumption/devices',
@@ -109,6 +109,7 @@ export const navItems: INavData[] = [
     url: '/consumption/overall',
     icon: 'cil-chart'
   },
+  /*
   {
     title: true,
     name: 'Theme'
