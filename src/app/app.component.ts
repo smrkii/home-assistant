@@ -1,24 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router, NavigationEnd } from "@angular/router";
 
-import { IconSetService } from '@coreui/icons-angular';
-import { freeSet } from '@coreui/icons';
-import { isPlatformBrowser } from '@angular/common';
-import { AuthService } from './auth/auth.service';
-import { ShellyApiService } from './shared/shelly-api.service';
-import { DevicesService } from './devices/devices.service';
+import { IconSetService } from "@coreui/icons-angular";
+import { freeSet } from "@coreui/icons";
+import { isPlatformBrowser } from "@angular/common";
+import { AuthService } from "./auth/auth.service";
+import { ShellyApiService } from "./shared/shelly-api.service";
+import { DevicesService } from "./devices/devices.service";
 
 declare var annyang: any;
 declare var SpeechKITT: any;
 
 @Component({
   // tslint:disable-next-line
-  selector: 'body',
-  template: '<router-outlet></router-outlet>',
+  selector: "body",
+  template: "<router-outlet></router-outlet>",
   providers: [IconSetService],
 })
 export class AppComponent implements OnInit {
   devices = {};
+  timer: any;
 
   constructor(
     private router: Router,
@@ -46,69 +47,75 @@ export class AppComponent implements OnInit {
     this.shellyApiService.autoLogin();
 
     const commands = {
-      'hi': () => { alert('hi'); },
-      'turn :room light :action': (room,action) => { this.switch(room,action); },
-      'set :device color to :color': (device,color) => { this.rgbw(device,color); }
+      hi: () => {
+        alert("hi");
+      },
+      "turn :room light :action": (room, action) => {
+        this.switch(room, action);
+      },
+      "set :device color to :color": (device, color) => {
+        this.rgbw(device, color);
+      },
     };
     annyang.addCommands(commands);
     annyang.start();
-
-
   }
 
-
-  switch(room: string, action: string){
-
-      for (let k in this.devices) {
-        if(this.devices[k].props.name == room){
-          this.shellyApiService.relayControll(0,action,this.devices[k].props.id).subscribe(
-            (response) => {
-            },
-            (error) => {
-            }
+  switch(room: string, action: string) {
+    for (let k in this.devices) {
+      if (this.devices[k].props.name == room) {
+        this.shellyApiService
+          .relayControll(0, action, this.devices[k].props.id)
+          .subscribe(
+            (response) => {},
+            (error) => {}
           );
-        }
-
-
-
-        console.log(k + ' is ' + this.devices[k].props.name)
       }
-
-
-
-
-
-
-    console.log(room);
-    console.log(action);
+      console.log(k + " is " + this.devices[k].props.name);
+    }
   }
 
-  rgbw(device: string, color: string){
-    console.log(device);
-    console.log(color);
-  }
+  rgbw(device: string, color: string) {
+    for (let k in this.devices) {
+      if (this.devices[k].props.name == device) {
+        clearInterval(this.timer);
+        this.timer = setTimeout(() => {
+          var red: number;
+          var green: number;
+          var blue: number;
 
+          if (color === "red") {
+            red = 255;
+            green = 0;
+            blue = 0;
+          } else if (color === "green") {
+            red = 0;
+            green = 255;
+            blue = 0;
+          } else if (color === "blue") {
+            red = 0;
+            green = 0;
+            blue = 255;
+          }
 
-  onSwitchClick(){
-     this.shellyApiService.relayControll(0,'on','e8db84d28717').subscribe(
-      (response) => {
-      },
-      (error) => {
+          this.shellyApiService
+            .rgbwControllerControll(
+              this.devices[k].props.id,
+              "on",
+              red,
+              green,
+              blue,
+              100,
+              100
+            )
+            .subscribe(
+              (response) => {
+                console.log(response);
+              },
+              (error) => {}
+            );
+        }, 500);
       }
-    );
+    }
   }
-
-  offSwitchClick(){
-    this.shellyApiService.relayControll(0,'off','e8db84d28717').subscribe(
-     (response) => {
-
-       //this.toastr.success('Hello world!', 'Toastr fun!');
-     },
-     (error) => {
-       console.log(error);
-
-
-     }
-   );
- }
 }
