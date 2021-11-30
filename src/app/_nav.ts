@@ -14,11 +14,11 @@ export const navItems: INavData[] = [
     title: true,
     name: 'Devices',
   },
-  {
+ /*  {
     name: 'Manage',
     url: '/devices/manage',
     icon: 'cil-equalizer'
-  },
+  }, */
   {
     name: 'Edit',
     url: '/devices/edit',
@@ -58,11 +58,11 @@ export const navItems: INavData[] = [
     title: true,
     name: 'Groups',
   },
-  {
+ /*  {
     name: 'Manage',
     url: '/groups/manage',
     icon: 'cil-equalizer'
-  },
+  }, */
   {
     name: 'Edit',
     url: '/groups/edit',

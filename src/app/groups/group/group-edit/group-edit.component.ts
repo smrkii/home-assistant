@@ -36,31 +36,9 @@ export class GroupEditComponent implements OnInit {
 
     }, (reason) => {
       console.log(reason);
-      // on dismiss
     });
 
   }
-
-  openEditModal(){
-
-
-  }
-
-  openSwitchEditModal(deviceId: string){
-
-  }
-
-  openRgbControllerEditModal(deviceId: string){
-
-
-  }
-
-  openShht1EditModal(deviceId: string){
-
-
-  }
-
-
 
   startEdit(){
     this.inEdit = true;
